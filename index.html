@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
-    <title>Asena Beshiktepeli | AI & Data Engineering Station</title>
+    <title>Asena Beshiktepeli | AI Engineering Station</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,9 @@
             --cyber-orange: #ff9f00;
             --cyber-blue: #00f0ff;
             --cyber-neon: #39ff14;
-            --bg-dark: #060913;
+            --bg-dark: #050811;
         }
 
-        /* CANLI SİBER ARKA PLAN */
         #cyber-canvas {
             position: fixed;
             top: 0;
@@ -26,7 +25,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #0c1328 0%, var(--bg-dark) 100%);
+            background: radial-gradient(circle at 50% 50%, #0b1528 0%, var(--bg-dark) 100%);
         }
 
         body {
@@ -47,34 +46,34 @@
             z-index: 1;
         }
 
-        /* ÜST PROFİL ALANI - HOLOGRAM EKRANI */
+        /* MASTER PROFILE HUD */
         .profile-card {
-            background: linear-gradient(135deg, rgba(255, 159, 0, 0.07), rgba(0, 240, 255, 0.03));
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(10, 20, 38, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 159, 0, 0.2);
-            border-top: 2px solid var(--cyber-orange);
+            border-top: 3px solid var(--cyber-orange);
             border-radius: 24px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 159, 0, 0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 30px rgba(255, 159, 0, 0.05);
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .profile-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,159,0,0.1), transparent);
-            animation: scanline 6s infinite linear;
+        .profile-card:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(0, 240, 255, 0.15);
         }
-        @keyframes scanline { 0% { left: -100%; } 100% { left: 200%; } }
 
         .profile-img {
-            width: 130px; height: 130px; border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
             border: 3px solid var(--cyber-orange);
             box-shadow: 0 0 30px rgba(255, 159, 0, 0.4);
-            object-fit: cover; margin-bottom: 20px;
+            object-fit: cover;
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -84,7 +83,7 @@
             margin: 10px 0;
             letter-spacing: 2px;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 159, 0, 0.3);
+            text-shadow: 0 0 20px rgba(255, 159, 0, 0.2);
         }
 
         .subtitle {
@@ -95,17 +94,16 @@
             margin-bottom: 20px;
         }
 
-        /* 2'Lİ PANEL GRID */
+        /* GRID CORES */
         .cyber-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
-        /* SİBER KARTLAR */
         .cyber-panel {
-            background: rgba(10, 16, 32, 0.6);
+            background: rgba(11, 19, 36, 0.5);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(0, 240, 255, 0.15);
@@ -113,23 +111,19 @@
             border-radius: 16px;
             padding: 25px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
         }
-
         .cyber-panel:hover {
-            transform: translateY(-5px) scale(1.01);
+            transform: translateY(-5px);
             border-color: var(--cyber-orange);
             border-left-color: var(--cyber-orange);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(255, 159, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 159, 0, 0.1);
         }
-
         .cyber-panel.orange-theme { border-left-color: var(--cyber-orange); }
-        .cyber-panel.orange-theme:hover { border-color: var(--cyber-blue); border-left-color: var(--cyber-blue); }
 
         .panel-header {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #ffffff;
             margin-bottom: 15px;
             display: flex;
@@ -139,9 +133,9 @@
 
         .panel-status {
             font-size: 0.75rem;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.4);
             border: 1px solid var(--cyber-blue);
             color: var(--cyber-blue);
         }
@@ -150,62 +144,50 @@
         /* SLIDERS */
         .slider-container { margin: 15px 0; }
         .slider-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; }
-        .slider-label span { color: #ffffff; }
-        .cyber-range { width: 100%; accent-color: var(--cyber-orange); background: rgba(0,0,0,0.5); height: 6px; border-radius: 3px; outline: none; }
+        .slider-label span { color: #fff; }
+        .cyber-range { width: 100%; accent-color: var(--cyber-orange); background: rgba(0,0,0,0.5); height: 6px; border-radius: 3px; }
 
-        /* BUTONLAR */
-        .social-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-        .cyber-btn {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--cyber-blue);
-            color: var(--cyber-blue);
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.2s ease;
-        }
-        .cyber-btn:hover {
-            background: var(--cyber-blue);
-            color: #000;
-            box-shadow: 0 0 20px var(--cyber-blue);
-            transform: translateY(-2px);
-        }
-
-        /* TEKNOLOJİ MATRIX ETİKETLERİ */
-        .matrix-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .matrix-badge { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; color: #cbd5e1; }
-
-        /* TIKLANDIĞINDA AÇILAN DEVAASA BÜYÜK EKRAN MODAL SİSTEMİ */
+        /* DEVAASA INTERACTIVE MODAL (BÜYÜK EKRAN) */
         .cyber-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(4, 7, 16, 0.95);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            z-index: 1000; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: scale(1.1);
+            background: rgba(3, 6, 12, 0.96);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.15, 0.85, 0.15, 1);
+            transform: scale(1.08);
         }
         .cyber-modal.active { opacity: 1; pointer-events: auto; transform: scale(1); }
 
         .modal-content {
-            width: 85%; max-width: 900px; background: rgba(12, 20, 38, 0.8);
-            border: 2px solid var(--cyber-orange); box-shadow: 0 0 60px rgba(255, 159, 0, 0.3);
+            width: 90%; max-width: 1000px; height: 80vh;
+            background: rgba(8, 14, 27, 0.85);
+            border: 2px solid var(--cyber-orange);
             border-radius: 24px; padding: 40px; position: relative;
-            animation: modalGlow 4s infinite alternate;
+            display: flex; flex-direction: column; justify-content: space-between;
+            box-shadow: 0 0 60px rgba(255, 159, 0, 0.25);
         }
-        @keyframes modalGlow { 0% { box-shadow: 0 0 40px rgba(255,159,0,0.2); } 100% { box-shadow: 0 0 60px rgba(0,240,255,0.3); } }
 
         .close-modal {
-            position: absolute; top: 20px; right: 25px; font-size: 2rem; color: var(--cyber-orange);
-            cursor: pointer; transition: color 0.2s;
+            position: absolute; top: 25px; right: 30px; font-size: 2.5rem;
+            color: var(--cyber-orange); cursor: pointer; transition: color 0.2s;
         }
-        .close-modal:hover { color: #ffffff; }
+        .close-modal:hover { color: #ffffff; text-shadow: 0 0 15px var(--cyber-orange); }
 
         .live-code-stream {
-            background: #020408; border-radius: 12px; padding: 20px;
-            font-size: 0.85rem; color: var(--cyber-neon); max-height: 250px;
-            overflow-y: auto; border: 1px dashed rgba(57, 255, 20, 0.3); margin-top: 20px;
+            background: #010307; border-radius: 12px; padding: 20px;
+            font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--cyber-neon);
+            flex-grow: 1; overflow-y: auto; border: 1px dashed rgba(57, 255, 20, 0.2); margin-top: 25px;
         }
+
+        /* BUTTONS & BADGES */
+        .social-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .cyber-btn {
+            background: rgba(0,0,0,0.3); border: 1px solid var(--cyber-blue); color: var(--cyber-blue);
+            padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.2s ease;
+        }
+        .cyber-btn:hover { background: var(--cyber-blue); color: #000; box-shadow: 0 0 20px var(--cyber-blue); }
+        .matrix-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .matrix-badge { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -214,43 +196,42 @@
 
     <div class="container notranslate">
         
-        <div class="profile-card" onclick="openImmersiveModal('Asena Beshiktepeli Systems', 'Deep Learning & Analytics Node initialized. System status nominal. Real-time predictive engines syncing across worldwide datasets.')">
-            <div class="panel-status" style="width: fit-content; margin: 0 auto 15px auto; border-color: var(--cyber-neon); color: var(--cyber-neon);">CORE STATUS: ONLINE</div>
-            <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena Beshiktepeli" class="profile-img">
+        <div class="profile-card" onclick="openImmersiveModal('Asena Beshiktepeli Mainframe', 'Neural network structures initialized. Core database synchronized successfully. Predictive systems are fully online across all active cloud clusters.')">
+            <div class="panel-status" style="width: fit-content; margin: 0 auto 15px auto; border-color: var(--cyber-neon); color: var(--cyber-neon);">SYSTEM: ACTIVE</div>
+            <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena" class="profile-img">
             <h1>Asena Beshiktepeli</h1>
             <div class="subtitle">📡 Data Scientist & AI Engineer</div>
-            <p style="color: #94a3b8; max-width: 750px; margin: 0 auto; font-size: 0.9rem;">Architecting predictive infrastructure, training high-dimensional algorithms, and deploying visual intelligence environments.</p>
+            <p style="color: #94a3b8; max-width: 700px; margin: 0 auto; font-size: 0.9rem;">Building high-dimensional predictive pipelines, automated model monitoring networks, and visual artificial intelligence matrices.</p>
         </div>
 
         <div class="social-row">
             <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="cyber-btn">🔗 SECURE LINKEDIN</a>
-            <a href="https://www.kaggle.com/anesaa" target="_blank" class="cyber-btn" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">🛸 KAGGLE WORKSPACE</a>
+            <a href="https://www.kaggle.com/anesaa" target="_blank" class="cyber-btn" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">🛸 KAGGLE TERMINAL</a>
             <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="cyber-btn">✉️ ENCRYPTED MAIL</a>
         </div>
 
-        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;">// LIVE INFERENCE STATIONS</h2>
-        
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.2rem;">// DEPLOYED PREDICTIVE ENGINES</h2>
         <div class="cyber-grid">
-            <div class="cyber-panel" onclick="openImmersiveModal('Waze Churn Matrix Logic', 'Executing tree-based boosting classification. Evaluation triggers customer risk scoring over driving telemetry arrays. Deep analytical weights processing.')">
+            <div class="cyber-panel" onclick="openImmersiveModal('Waze Attrition Core Logic', 'Loading log files... Executing Gradient Boosting Decision Tree optimization models. Evaluating telemetry distance arrays against critical driving velocity variables.')">
                 <div class="panel-header">
-                    <span>Waze Churn Risk</span>
-                    <span class="panel-status">GBM ENGINE</span>
+                    <span>Waze Churn Tracker</span>
+                    <span class="panel-status">GBM MODEL</span>
                 </div>
                 <div class="slider-container" onclick="event.stopPropagation()">
                     <div class="slider-label">Monthly Distance: <span id="km-lbl">3500 km</span></div>
                     <input type="range" min="500" max="8000" value="3500" class="cyber-range" id="km-range">
                 </div>
                 <div class="slider-container" onclick="event.stopPropagation()">
-                    <div class="slider-label">Active App Sessions: <span id="sessions-lbl">25</span></div>
+                    <div class="slider-label">App Sessions: <span id="sessions-lbl">25</span></div>
                     <input type="range" min="1" max="100" value="25" class="cyber-range" id="sessions-range">
                 </div>
-                <div id="waze-telemetry" style="margin-top: 15px; color: var(--cyber-neon); font-size: 0.85rem; font-weight: bold;">STATUS: PROCESSING...</div>
+                <div id="waze-telemetry" style="margin-top: 15px; color: var(--cyber-neon); font-size: 0.85rem; font-weight: bold;">CALCULATING LOGS...</div>
             </div>
 
-            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('TikTok Violation Safety Hub', 'Random Forest architecture processing text arrays and report weights. Real-time scanning flags malicious digital signatures automatically.')">
+            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('TikTok Audit Engine Terminal', 'Scanning multi-structured video log metrics. Running localized Random Forest filters to intercept content anomalies and generate instantaneous platform safety risk scores.')">
                 <div class="panel-header">
                     <span>TikTok Content Audit</span>
-                    <span class="panel-status">RISK MATRICES</span>
+                    <span class="panel-status">RISK MATRIX</span>
                 </div>
                 <div class="slider-container" onclick="event.stopPropagation()">
                     <div class="slider-label">Media Views: <span id="views-lbl">45,000</span></div>
@@ -260,67 +241,55 @@
                     <div class="slider-label">User Reports: <span id="reports-lbl">12</span></div>
                     <input type="range" min="0" max="100" value="12" class="cyber-range" id="reports-range" style="accent-color: var(--cyber-blue);">
                 </div>
-                <div id="tiktok-telemetry" style="margin-top: 15px; color: var(--cyber-orange); font-size: 0.85rem; font-weight: bold;">STATUS: PROCESSING...</div>
+                <div id="tiktok-telemetry" style="margin-top: 15px; color: var(--cyber-orange); font-size: 0.85rem; font-weight: bold;">PROCESSING ENGINE...</div>
             </div>
         </div>
 
-        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;">// CORE TECHNICAL MATRIX</h2>
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.2rem;">// EXPERTISE MATRICES</h2>
         <div class="cyber-grid">
-            <div class="cyber-panel" onclick="openImmersiveModal('Languages Matrix Data', 'Executing low-level compilation pipelines. Production grade models utilize advanced matrix multiplication structures across distributed cores.')">
-                <div class="panel-header">Languages & Core</div>
+            <div class="cyber-panel" onclick="openImmersiveModal('Languages & Core Specs', 'Compiling core language trees. Object-oriented development structures optimizing production data extraction routines smoothly.')">
+                <div class="panel-header">Languages & Logic</div>
                 <div class="matrix-badges">
-                    <span class="matrix-badge" style="border-color: var(--cyber-blue);">Python (OOP)</span>
+                    <span class="matrix-badge" style="color: var(--cyber-blue);">Python (OOP)</span>
                     <span class="matrix-badge">Advanced SQL</span>
                 </div>
             </div>
-            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('Data Pipelines Stream', 'Deploying optimized scheduling algorithms. Automated telemetry orchestration pipelines structure messy logs into multi-dimensional databases.')">
-                <div class="panel-header">Data Engineering</div>
+            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('Data Pipelines & Flow', 'Structuring microservice configurations. Continuous orchestration routines cleaning, sorting, and delivering raw log variables into analytical pipelines.')">
+                <div class="panel-header">Data Pipelines</div>
                 <div class="matrix-badges">
-                    <span class="matrix-badge" style="border-color: var(--cyber-orange);">Pandas & NumPy</span>
-                    <span class="matrix-badge">Git Workspace Architecture</span>
+                    <span class="matrix-badge" style="color: var(--cyber-orange);">Pandas & NumPy</span>
+                    <span class="matrix-badge">Git Version Controls</span>
                 </div>
             </div>
-            <div class="cyber-panel" onclick="openImmersiveModal('Supervised Learning Node', 'Initializing optimization parameters. Weights tune mathematical architectures to increase system accuracy over telemetry fields.')">
+            <div class="cyber-panel" onclick="openImmersiveModal('Machine Learning Cluster', 'Evaluating architectural accuracy logs. Tuning hyperparameters via grid searches to construct stable forecasting systems.')">
                 <div class="panel-header">Machine Learning</div>
                 <div class="matrix-badges">
-                    <span class="matrix-badge" style="border-color: var(--cyber-neon);">Scikit-Learn</span>
-                    <span class="matrix-badge">Predictive Automation</span>
+                    <span class="matrix-badge" style="color: var(--cyber-neon);">Scikit-Learn</span>
+                    <span class="matrix-badge">Predictive Modelling</span>
                 </div>
             </div>
         </div>
 
-        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;">// ARCHITECTURE INFRASTRUCTURE</h2>
-        <div class="cyber-panel" style="margin-bottom: 20px;" onclick="openImmersiveModal('Data Engineering Vault', 'Accessing external mainframe servers. Deploying analytical logic to compute large dataset metrics on request.')">
-            <div class="panel-header">🚀 Engineering Hub & Sandbox Environment</div>
-            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">Central engineering terminal compiling pipeline mechanics, object-oriented script logic, and modular automated frameworks built for deployment.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="cyber-btn" style="font-size:0.75rem; display:inline-block; margin-top:10px;" onclick="event.stopPropagation()">EXTRACT HUB CORE</a>
-        </div>
-
-        <div class="cyber-panel orange-theme" style="margin-bottom: 40px;" onclick="openImmersiveModal('Waze & TikTok Analytics Node', 'Decrypting industrial business intelligence files. Extracting structural analytics directly into graphic telemetry frameworks.')">
-            <div class="panel-header">📊 Case Studies: Churn Logs & Media Transformation</div>
-            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">Advanced pipelines evaluating Waze customer attrition matrices and transforming chaotic unstructured TikTok media signals into analytical data frames.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="cyber-btn" style="font-size:0.75rem; display:inline-block; margin-top:10px; border-color: var(--cyber-orange); color:var(--cyber-orange);" onclick="event.stopPropagation()">SCAN ANALYSIS</a>
-        </div>
-
-        <div class="cyber-panel" style="height: 350px; display: flex; justify-content: center; background: rgba(4,7,16,0.7);" onclick="openImmersiveModal('Radar Telemetry Feed', 'Scanning real-time system performance data vectors. Systems functional parameters balanced across core clusters.')">
+        <div class="cyber-panel" style="height: 340px; display: flex; justify-content: center; background: rgba(4,7,16,0.6);" onclick="openImmersiveModal('Telemetry Metrics Display', 'Fetching performance analytics across computing arrays. Balanced data architecture responding efficiently to operational requirements.')">
             <canvas id="radarTelemetry"></canvas>
         </div>
+
     </div>
 
     <div class="cyber-modal" id="immersiveModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeImmersiveModal()">&times;</span>
-            <h2 id="modalTitle" style="font-family: 'Orbitron', sans-serif; color: #fff; margin-top:0;">SYSTEM ACCESSED</h2>
-            <p id="modalDesc" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;"></p>
-            <div style="font-size: 0.75rem; color: var(--cyber-orange); margin-top: 25px;">[📡 INFRASTRUCTURE DATA MATRIX STREAM]</div>
+            <h2 id="modalTitle" style="font-family: 'Orbitron', sans-serif; color: #fff; margin: 0;">ACCESSING STATION...</h2>
+            <p id="modalDesc" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-top: 15px;"></p>
+            <div style="font-size: 0.75rem; color: var(--cyber-orange); margin-top: 20px;">[📡 LIVE MATRIX CORE PIPELINE FEED]</div>
             <div class="live-code-stream" id="codeStream"></div>
         </div>
     </div>
 
     <script>
-        // IMMERSIVE WEB AUDIO ENGINE
+        // AUDIO SYNTH CORE
         let audioCtx = null;
-        function playSynthBeep(freq, dur, type='sine') {
+        function playSynthSound(freq, dur, type='sine') {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -335,117 +304,114 @@
             } catch(e){}
         }
 
-        // DEVAASA BÜYÜK EKRAN MODAL FONKSİYONLARI
+        // FULLSCREEN INTERACTIVE OPENER
         function openImmersiveModal(title, text) {
-            playSynthBeep(300, 0.1, 'square'); // Derin sistem açılış sesi
-            setTimeout(() => playSynthBeep(600, 0.15, 'sine'), 80);
+            playSynthSound(280, 0.1, 'square');
+            setTimeout(() => playSynthSound(560, 0.15, 'sine'), 70);
             
             document.getElementById('modalTitle').innerText = `// ${title.toUpperCase()}`;
             document.getElementById('modalDesc').innerText = text;
             const modal = document.getElementById('immersiveModal');
             modal.classList.add('active');
             
-            // Canlı Matrix Kod Akışı Simülasyonu
             const stream = document.getElementById('codeStream');
             stream.innerHTML = '';
-            let lineCount = 0;
-            const codes = [
-                "import os, sys, tensorflow as tf", ">> Initializing high-dimensional tensor matrices...",
-                "model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')", ">> System Matrix: Weights matched with 98.42% accuracy.",
-                "📡 Security handshake established with global network node.", ">> Memory allocation block: 0x7FFF8C2A optimized.",
-                "[SUCCESS] Pipeline array successfully structured.", ">> Scanning local directories for multi-threaded inference operations..."
+            let count = 0;
+            const matrixLogs = [
+                "import data_pipeline, tensorflow as tf", ">> Loading neural network weights matrix...",
+                "model.compile(optimizer='adam', loss='binary_crossentropy')", ">> Parameters validated. Validation accuracy: 98.24%",
+                "📡 Establishing encrypted link with remote processing arrays.", ">> Memory initialization block configured at zone 0x4F3B",
+                "[SUCCESS] Production stream pipeline fully operating.", ">> Tracking system variables for automated anomaly extraction..."
             ];
             
-            let interval = setInterval(() => {
-                if(lineCount < codes.length) {
-                    stream.innerHTML += codes[lineCount] + "<br>";
+            let logInterval = setInterval(() => {
+                if(count < matrixLogs.length) {
+                    stream.innerHTML += matrixLogs[count] + "<br>";
                     stream.scrollTop = stream.scrollHeight;
-                    playSynthBeep(800 + (lineCount*50), 0.02, 'sine');
-                    lineCount++;
-                } else { clearInterval(interval); }
-            }, 180);
-            modal.dataset.intervalId = interval;
+                    playSynthSound(750 + (count * 40), 0.02, 'sine');
+                    count++;
+                } else { clearInterval(logInterval); }
+            }, 150);
+            modal.dataset.intervalId = logInterval;
         }
 
         function closeImmersiveModal() {
-            playSynthBeep(200, 0.12, 'sawtooth'); // Kapanış siber sesi
+            playSynthSound(190, 0.1, 'sawtooth');
             const modal = document.getElementById('immersiveModal');
             modal.classList.remove('active');
             clearInterval(modal.dataset.intervalId);
         }
 
-        // REAL-TIME CANVAS HOLOGRAPHIC BACKGROUND
+        // AMBIENT BACKGROUND MATRIX LINES
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
         let lines = [];
-
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
-        class DataLine {
+        class GridLine {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = canvas.height + Math.random() * 100;
-                this.speed = Math.random() * 1.5 + 0.5;
-                this.len = Math.random() * 80 + 20;
-                this.opacity = Math.random() * 0.25 + 0.05;
+                this.speed = Math.random() * 1.2 + 0.4;
+                this.length = Math.random() * 70 + 30;
+                this.opacity = Math.random() * 0.2 + 0.04;
                 this.color = Math.random() > 0.5 ? '255, 159, 0' : '0, 240, 255';
             }
-            update() { this.y -= this.speed; if (this.y < -this.len) { this.y = canvas.height + this.len; this.x = Math.random() * canvas.width; } }
-            draw() {
+            move() { this.y -= this.speed; if (this.y < -this.length) { this.y = canvas.height + this.length; this.x = Math.random() * canvas.width; } }
+            render() {
                 ctx.strokeStyle = `rgba(${this.color}, ${this.opacity})`;
                 ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y - this.len); ctx.stroke();
+                ctx.lineTo(this.x, this.y - this.length); ctx.stroke();
             }
         }
-        for(let i=0; i<60; i++) lines.push(new DataLine());
-        function animateBackground() {
-            ctx.fillStyle = 'rgba(6, 9, 19, 0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-            lines.forEach(l => { l.update(); l.draw(); });
-            requestAnimationFrame(animateBackground);
+        for(let i=0; i<50; i++) lines.push(new GridLine());
+        function drawBackground() {
+            ctx.fillStyle = 'rgba(5, 8, 17, 0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            lines.forEach(l => { l.move(); l.render(); });
+            requestAnimationFrame(drawBackground);
         }
-        animateBackground();
+        drawBackground();
 
-        // KULLANICI TIKLAMALARINA ÖZEL EKRAN REAKSİYONU
-        window.addEventListener('click', () => { playSynthBeep(520, 0.03, 'sine'); });
+        window.addEventListener('click', () => { playSynthSound(490, 0.02, 'sine'); });
 
-        // SIMULATORS REAL-TIME MATHEMATICAL ENGINES
+        // MATHEMATICAL INFERENCE CALCULATORS
         const kmR = document.getElementById('km-range'); const sR = document.getElementById('sessions-range');
         const vR = document.getElementById('views-range'); const rR = document.getElementById('reports-range');
 
-        function calcWaze() {
+        function updateWaze() {
             const km = parseInt(kmR.value); const s = parseInt(sR.value);
             document.getElementById('km-lbl').innerText = km + " km"; document.getElementById('sessions-lbl').innerText = s;
-            let res = Math.min(100, Math.max(5, Math.round((km/8000)*65 + (100-s)*0.35)));
-            let el = document.getElementById('waze-telemetry');
-            if(res > 65) el.innerHTML = `⚠️ ATTRITION RISK DETECTED: ${res}% [CRITICAL CORE]`;
-            else el.innerHTML = `✅ PIPELINE NOMINAL: CHURN RISK ${res}% [STABLE]`;
+            let score = Math.min(100, Math.max(5, Math.round((km/8000)*60 + (100-s)*0.4)));
+            let output = document.getElementById('waze-telemetry');
+            if(score > 65) output.innerHTML = `⚠️ CHURN RISK WARNING: ${score}% [CRITICAL THREAT]`;
+            else output.innerHTML = `✅ NOMINAL MATRIX FLOW: RISK ${score}% [SECURE]`;
         }
-        function calcTikTok() {
+        function updateTikTok() {
             const v = parseInt(vR.value); const r = parseInt(rR.value);
             document.getElementById('views-lbl').innerText = v.toLocaleString(); document.getElementById('reports-lbl').innerText = r;
-            let res = Math.min(100, Math.max(0, Math.round((r*0.75) + (v/500000)*25)));
-            let el = document.getElementById('tiktok-telemetry');
-            if(res > 60) el.innerHTML = `🚨 AUDIT ALERT: INCIDENT RISK ${res}% [VIO RISK]`;
-            else el.innerHTML = `🟢 SYSTEM REPORT CLEAN: MATRIX ERROR AT ${res}%`;
+            let score = Math.min(100, Math.max(0, Math.round((r*0.8) + (v/500000)*20)));
+            let output = document.getElementById('tiktok-telemetry');
+            if(score > 60) output.innerHTML = `🚨 VIOLATION ANOMALY DETECTED: RISK ${score}%`;
+            else output.innerHTML = `🟢 COMPLIANCE CONFIRMED: FAULT RISK AT ${score}%`;
         }
-        kmR.addEventListener('input', () => { calcWaze(); playSynthBeep(400, 0.01); });
-        sR.addEventListener('input', () => { calcWaze(); playSynthBeep(420, 0.01); });
-        vR.addEventListener('input', () => { calcTikTok(); playSynthBeep(440, 0.01); });
-        rR.addEventListener('input', () => { calcTikTok(); playSynthBeep(460, 0.01); });
-        calcWaze(); calcTikTok();
+        kmR.addEventListener('input', () => { updateWaze(); playSynthSound(380, 0.01); });
+        sR.addEventListener('input', () => { updateWaze(); playSynthSound(400, 0.01); });
+        vR.addEventListener('input', () => { updateTikTok(); playSynthSound(420, 0.01); });
+        rR.addEventListener('input', () => { updateTikTok(); playSynthSound(440, 0.01); });
+        updateWaze(); updateTikTok();
 
-        // RADAR CHART TELEMETRY ENGINE
+        // TELEMETRY RADAR ENGINE
         document.addEventListener("DOMContentLoaded", function() {
             const rCtx = document.getElementById('radarTelemetry').getContext('2d');
             new Chart(rCtx, {
                 type: 'radar',
                 data: {
-                    labels: ['Algorithms', 'Optimization', 'Data Pipelines', 'Predictive Systems', 'Statistics'],
+                    labels: ['Algorithms', 'Data Optimization', 'Pipelines', 'Predictive Logic', 'Statistics Grid'],
                     datasets: [{
-                        label: 'Core Allocation Telemetry (%)',
-                        data: [92, 78, 85, 88, 90],
-                        backgroundColor: 'rgba(255, 159, 0, 0.03)',
+                        label: 'Core Allocation Metrics (%)',
+                        data: [94, 80, 88, 91, 87],
+                        backgroundColor: 'rgba(255, 159, 0, 0.02)',
                         borderColor: '#ff9f00',
                         pointBackgroundColor: '#00f0ff',
                         borderWidth: 2
@@ -461,9 +427,8 @@
     </script>
 
     <script type="text/javascript">
-        window.addEventListener('DOMContentLoaded', function() {
-            var v = document.createElement('script'); v.type = 'text/javascript';
-            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
             v.onload = function() {
                 window.voiceflow.chat.load({
                     verify: { projectID: '6a1b26696b0f6697163e7922' },
@@ -471,8 +436,10 @@
                     versionID: 'production'
                 });
             };
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(v, s);
-        });
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; 
+            v.type = "text/javascript";
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
     </script>
 </body>
 </html>
