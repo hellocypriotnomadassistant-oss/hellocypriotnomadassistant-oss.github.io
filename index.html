@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(rgba(6, 9, 19, 0.92), rgba(6, 9, 19, 0.92)),
+            background: linear-gradient(rgba(6, 9, 19, 0.94), rgba(6, 9, 19, 0.94)),
                         linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
                         linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
                         url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2070') no-repeat center center fixed;
@@ -74,12 +74,14 @@
         .btn { font-family: 'Fira Code', monospace; display: inline-block; background-color: rgba(31, 41, 55, 0.8); color: #00f0ff; padding: 9px 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid #00f0ff; border-radius: 6px; text-decoration: none; transition: all 0.2s ease; margin-top: 15px; }
         .btn:hover { background-color: #00f0ff; color: #060913; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
 
-        /* YENİ: Yapay Zeka Simülatör Tasarım Öğeleri */
+        /* Simülatör Tasarım Öğeleri */
         .sim-control { margin-bottom: 15px; }
         .sim-control label { display: block; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #00f0ff; margin-bottom: 5px; }
         .sim-slider { width: 100%; accent-color: #00f0ff; background: rgba(28, 37, 65, 0.6); border-radius: 5px; height: 6px; }
         .sim-output-box { background: rgba(6, 9, 19, 0.8); border: 1px dashed #39ff14; border-radius: 8px; padding: 15px; margin-top: 20px; text-align: center; font-family: 'Fira Code', monospace; }
-        #prediction-result { font-weight: bold; font-size: 1.2rem; }
+        .prediction-result { font-weight: bold; font-size: 1.2rem; }
+        
+        .simulators-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 25px; }
     </style>
 </head>
 <body>
@@ -102,25 +104,49 @@
             <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="social-btn">✉️ Secure Mail</a>
         </div>
 
-        <h2>🤖 Live ML Inference Engine (Simulator)</h2>
-        <div class="ai-simulator-card">
-            <strong>Waze User Churn Risk Calculator</strong>
-            <p style="font-size: 0.9rem;">Interact with the active deployment matrix below. This local JavaScript logic simulates the behavior of a trained Gradient Boosting classifier evaluating device telemetry in real-time.</p>
+        <h2>🤖 Live ML Inference Engines (Simulators)</h2>
+        <div class="simulators-grid">
             
-            <div class="sim-control">
-                <label>Monthly Driving Kilometers: <span id="km-val">3500</span> km</label>
-                <input type="range" min="500" max="8000" value="3500" class="sim-slider" id="km-slider">
+            <div class="ai-simulator-card">
+                <strong>Waze User Churn Risk Calculator</strong>
+                <p style="font-size: 0.9rem; margin-bottom: 20px;">Simulates a trained Gradient Boosting classifier evaluating device telemetry for customer attrition analysis.</p>
+                
+                <div class="sim-control">
+                    <label>Monthly Driving Kilometers: <span id="km-val">3500</span> km</label>
+                    <input type="range" min="500" max="8000" value="3500" class="sim-slider" id="km-slider">
+                </div>
+
+                <div class="sim-control">
+                    <label>App Sessions This Month: <span id="sessions-val">25</span> sessions</label>
+                    <input type="range" min="1" max="100" value="25" class="sim-slider" id="sessions-slider">
+                </div>
+
+                <div class="sim-output-box" id="waze-box">
+                    <span style="color: #9ca3af; font-size: 0.8rem;">INFERENCE // RESULT:</span>
+                    <div id="waze-result" class="prediction-result" style="color: #39ff14; margin-top: 5px;">CALCULATING...</div>
+                </div>
             </div>
 
-            <div class="sim-control">
-                <label>App Sessions This Month: <span id="sessions-val">25</span> sessions</label>
-                <input type="range" min="1" max="100" value="25" class="sim-slider" id="sessions-slider">
+            <div class="ai-simulator-card">
+                <strong>TikTok Content Claim Risk Audit</strong>
+                <p style="font-size: 0.9rem; margin-bottom: 20px;">Simulates a Random Forest pipeline auditing structured media variables to flag high-risk community standard violations.</p>
+                
+                <div class="sim-control">
+                    <label>Video View Count: <span id="views-val">45000</span> views</label>
+                    <input type="range" min="1000" max="500000" value="45000" class="sim-slider" id="views-slider">
+                </div>
+
+                <div class="sim-control">
+                    <label>User Report Rate: <span id="reports-val">12</span> reports</label>
+                    <input type="range" min="0" max="100" value="12" class="sim-slider" id="reports-slider">
+                </div>
+
+                <div class="sim-output-box" id="tiktok-box">
+                    <span style="color: #9ca3af; font-size: 0.8rem;">AUDIT ENGINE // STATUS:</span>
+                    <div id="tiktok-result" class="prediction-result" style="color: #39ff14; margin-top: 5px;">PROCESSING...</div>
+                </div>
             </div>
 
-            <div class="sim-output-box">
-                <span style="color: #9ca3af; font-size: 0.8rem;">INFERENCE IN PROGRESS // RESULT:</span>
-                <div id="prediction-result" style="color: #39ff14; margin-top: 5px;">CALCULATING...</div>
-            </div>
         </div>
 
         <h2>🛠️ Technical Competency Matrix</h2>
@@ -251,39 +277,75 @@
     </div>
 
     <script>
+        // 1. Waze Hesaplama Motoru
         const kmSlider = document.getElementById('km-slider');
         const sessionsSlider = document.getElementById('sessions-slider');
         const kmVal = document.getElementById('km-val');
         const sessionsVal = document.getElementById('sessions-val');
-        const resultDiv = document.getElementById('prediction-result');
+        const wazeResult = document.getElementById('waze-result');
+        const wazeBox = document.getElementById('waze-box');
 
-        function updatePrediction() {
+        function updateWazePrediction() {
             const km = parseInt(kmSlider.value);
             const sessions = parseInt(sessionsSlider.value);
-            
             kmVal.innerText = km;
             sessionsVal.innerText = sessions;
 
-            // Yapay zeka mantığı simülasyonu: Sürüş mesafesi yüksek, uygulama seansı düşükse Churn (Ayrılma) olasılığı artar
             let churnProbability = Math.min(100, Math.max(5, Math.round((km / 8000) * 60 + (100 - sessions) * 0.4)));
 
             if (churnProbability > 70) {
-                resultDiv.innerHTML = `⚠️ CHURN RISK: ${churnProbability}% [CRITICAL EXIT BEHAVIOR]`;
-                resultDiv.style.color = '#ff3333';
+                wazeResult.innerHTML = `⚠️ CHURN RISK: ${churnProbability}% [CRITICAL]`;
+                wazeResult.style.color = '#ff3333';
+                wazeBox.style.borderColor = '#ff3333';
             } else if (churnProbability > 40) {
-                resultDiv.innerHTML = `⚡ CHURN RISK: ${churnProbability}% [MODERATE / MONITOR]`;
-                resultDiv.style.color = '#ffb300';
+                wazeResult.innerHTML = `⚡ CHURN RISK: ${churnProbability}% [MODERATE]`;
+                wazeResult.style.color = '#ffb300';
+                wazeBox.style.borderColor = '#ffb300';
             } else {
-                resultDiv.innerHTML = `✅ CHURN RISK: ${churnProbability}% [LOYAL USER PROFILE]`;
-                resultDiv.style.color = '#39ff14';
+                wazeResult.innerHTML = `✅ CHURN RISK: ${churnProbability}% [LOYAL]`;
+                wazeResult.style.color = '#39ff14';
+                wazeBox.style.borderColor = '#39ff14';
             }
         }
 
-        kmSlider.addEventListener('input', updatePrediction);
-        sessionsSlider.addEventListener('input', updatePrediction);
+        // 2. TikTok Hesaplama Motoru
+        const viewsSlider = document.getElementById('views-slider');
+        const reportsSlider = document.getElementById('reports-slider');
+        const viewsVal = document.getElementById('views-val');
+        const reportsVal = document.getElementById('reports-val');
+        const tiktokResult = document.getElementById('tiktok-result');
+        const tiktokBox = document.getElementById('tiktok-box');
+
+        function updateTikTokPrediction() {
+            const views = parseInt(viewsSlider.value);
+            const reports = parseInt(reportsSlider.value);
+            viewsVal.innerText = views.toLocaleString();
+            reportsVal.innerText = reports;
+
+            let claimRisk = Math.min(100, Math.max(0, Math.round((reports * 0.8) + (views / 500000) * 20)));
+
+            if (claimRisk > 65) {
+                tiktokResult.innerHTML = `🚨 VIOLATION RISK: ${claimRisk}% [BAN CANDIDATE]`;
+                tiktokResult.style.color = '#ff3333';
+                tiktokBox.style.borderColor = '#ff3333';
+            } else if (claimRisk > 30) {
+                tiktokResult.innerHTML = `🟡 REVIEW STATUS: ${claimRisk}% [UNDER RE-AUDIT]`;
+                tiktokResult.style.color = '#ffb300';
+                tiktokBox.style.borderColor = '#ffb300';
+            } else {
+                tiktokResult.innerHTML = `🟢 STATUS: CLEAN (${claimRisk}% RISK)`;
+                tiktokResult.style.color = '#39ff14';
+                tiktokBox.style.borderColor = '#39ff14';
+            }
+        }
+
+        kmSlider.addEventListener('input', updateWazePrediction);
+        sessionsSlider.addEventListener('input', updateWazePrediction);
+        viewsSlider.addEventListener('input', updateTikTokPrediction);
+        reportsSlider.addEventListener('input', updateTikTokPrediction);
         
-        // İlk açılışta çalıştır
-        updatePrediction();
+        updateWazePrediction();
+        updateTikTokPrediction();
     </script>
 
     </body>
