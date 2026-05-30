@@ -71,12 +71,12 @@
         .btn { font-family: 'Fira Code', monospace; display: inline-block; background-color: rgba(31, 41, 55, 0.8); color: #00f0ff; padding: 9px 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid #00f0ff; border-radius: 6px; text-decoration: none; transition: all 0.2s ease; margin-top: 15px; }
         .btn:hover { background-color: #00f0ff; color: #060913; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
 
-        /* SIMULATOR MODUL STYLES */
+        /* SIMULATOR CONTROLS */
         .sim-control { margin-bottom: 15px; }
         .sim-control label { display: block; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #00f0ff; margin-bottom: 5px; }
         .sim-slider { width: 100%; accent-color: #00f0ff; background: rgba(28, 37, 65, 0.6); border-radius: 5px; height: 6px; }
         .sim-output-box { background: rgba(6, 9, 19, 0.8); border: 1px dashed #39ff14; border-radius: 8px; padding: 15px; margin-top: 20px; text-align: center; font-family: 'Fira Code', monospace; }
-        .prediction-result { font-weight: bold; font-size: 1.15rem; letter-spacing: 0.5px; }
+        .prediction-result { font-weight: bold; font-size: 1.15rem; }
         .simulators-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 25px; }
     </style>
 </head>
@@ -177,3 +177,149 @@
         
         <h2>⚡ Core Infrastructure</h2>
         <div class="project-card">
+            <strong>Data Science Engineering Hub</strong>
+            <p>A centralized repository compiling advanced modular Python object-oriented programming (OOP) modules, automation logic, and foundational computing scripts designed for analytical scalability.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python Core</span>
+                <span class="tech-badge">Git Version Control</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="btn">Deploy Repository</a>
+        </div>
+
+        <div class="project-card">
+            <strong>AI & Predictive Modeling Sandbox</strong>
+            <p>Advanced analytical testing ground dedicated to model evaluation, supervised learning algorithms, predictive telemetry, and scheduling autonomous algorithmic inference agents.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Machine Learning</span>
+                <span class="tech-badge">Statistical Inference</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="btn">Scan AI Workspace</a>
+        </div>
+
+        <h2>📊 Analytical Case Studies</h2>
+        
+        <div class="project-card">
+            <strong>Waze User Retention & Churn Optimization</strong>
+            <p>Integrated advanced exploratory data analysis (EDA) with statistical modeling to optimize user lifecycle values by isolating key churn drivers within device telemetry logs.</p>
+            <div class="project-details"><span>EXECUTION //</span> Prevent customer loss by predicting telemetry-driven user exit behaviors.</div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Waze_User_Churn_Project" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+
+        <div class="project-card">
+            <strong>TikTok Media Data Transformation Pipeline</strong>
+            <p>Engineered an extensive data cleaning and restructuring pipeline capable of transforming unstructured user interactions into structured arrays optimal for algorithm execution.</p>
+            <div class="project-details"><span>EXECUTION //</span> Normalize chaotic media engagement variables into scalable ML-ready sets.</div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/TikTok_Data_Preparation_Project" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+
+        <div class="project-card">
+            <strong>NYC Transit Geospatial & Revenue Analytics</strong>
+            <p>Executed large-scale temporal and spatial regression models on complex inner-city transportation records to isolate variables predicting peak surge pricing corridors.</p>
+            <div class="project-details"><span>EXECUTION //</span> Optimize fleet operations through comprehensive temporal trip revenue auditing.</div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/NYC_Taxi_Analytics_Project" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+
+        <div class="project-card">
+            <strong>Global Venture Capital & Unicorn Market Dynamics</strong>
+            <p>Conducted high-level market intelligence analytics across international private venture funding datasets, tracking velocity trends and industry sector concentration hubs.</p>
+            <div class="project-details"><span>EXECUTION //</span> Map startup capitalization patterns and sector growth distributions globally.</div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Unicorn-Analysis" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+    </div>
+
+    <script>
+        // WAZE CALCULATIONS
+        const kmSlider = document.getElementById('km-slider');
+        const sessionsSlider = document.getElementById('sessions-slider');
+        const kmVal = document.getElementById('km-val');
+        const sessionsVal = document.getElementById('sessions-val');
+        const wazeResult = document.getElementById('waze-result');
+        const wazeBox = document.getElementById('waze-box');
+
+        function updateWaze() {
+            const km = parseInt(kmSlider.value);
+            const sessions = parseInt(sessionsSlider.value);
+            kmVal.innerText = km;
+            sessionsVal.innerText = sessions;
+            let prob = Math.min(100, Math.max(5, Math.round((km/8000)*60 + (100-sessions)*0.4)));
+            if(prob > 70){ wazeResult.innerHTML = `⚠️ CHURN RISK: ${prob}% [CRITICAL]`; wazeResult.style.color = '#ff3333'; wazeBox.style.borderColor = '#ff3333'; }
+            else if(prob > 40){ wazeResult.innerHTML = `⚡ CHURN RISK: ${prob}% [MODERATE]`; wazeResult.style.color = '#ffb300'; wazeBox.style.borderColor = '#ffb300'; }
+            else { wazeResult.innerHTML = `✅ CHURN RISK: ${prob}% [LOYAL]`; wazeResult.style.color = '#39ff14'; wazeBox.style.borderColor = '#39ff14'; }
+        }
+
+        // TIKTOK CALCULATIONS
+        const viewsSlider = document.getElementById('views-slider');
+        const reportsSlider = document.getElementById('reports-slider');
+        const viewsVal = document.getElementById('views-val');
+        const reportsVal = document.getElementById('reports-val');
+        const tiktokResult = document.getElementById('tiktok-result');
+        const tiktokBox = document.getElementById('tiktok-box');
+
+        function updateTikTok() {
+            const views = parseInt(viewsSlider.value);
+            const reports = parseInt(reportsSlider.value);
+            viewsVal.innerText = views.toLocaleString();
+            reportsVal.innerText = reports;
+            let risk = Math.min(100, Math.max(0, Math.round((reports*0.8) + (views/500000)*20)));
+            if(risk > 65){ tiktokResult.innerHTML = `🚨 VIOLATION RISK: ${risk}% [HIGH RISK]`; tiktokResult.style.color = '#ff3333'; tiktokBox.style.borderColor = '#ff3333'; }
+            else if(risk > 30){ tiktokResult.innerHTML = `🟡 REVIEW STATUS: ${risk}% [AUDIT]`; tiktokResult.style.color = '#ffb300'; tiktokBox.style.borderColor = '#ffb300'; }
+            else { tiktokResult.innerHTML = `🟢 STATUS: CLEAN (${risk}% RISK)`; tiktokResult.style.color = '#39ff14'; tiktokBox.style.borderColor = '#39ff14'; }
+        }
+
+        kmSlider.addEventListener('input', updateWaze);
+        sessionsSlider.addEventListener('input', updateWaze);
+        viewsSlider.addEventListener('input', updateTikTok);
+        reportsSlider.addEventListener('input', updateTikTok);
+        updateWaze(); updateTikTok();
+
+        // RADAR MATRIX ENGINE
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('architectureChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Advanced Algorithms', 'Model Optimization', 'Data Engineering', 'Predictive Inference', 'Statistical Analysis'],
+                    datasets: [{
+                        label: 'System Competency Level (%)',
+                        data: [90, 75, 80, 85, 88],
+                        backgroundColor: 'rgba(0, 240, 255, 0.15)',
+                        borderColor: '#00f0ff',
+                        pointBackgroundColor: '#39ff14',
+                        pointBorderColor: '#060913',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            grid: { color: 'rgba(0, 240, 255, 0.1)' },
+                            angleLines: { color: 'rgba(0, 240, 255, 0.2)' },
+                            pointLabels: { color: '#d1d5db', font: { family: 'Fira Code', size: 10 } },
+                            ticks: { display: false },
+                            suggestedMin: 0, suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { labels: { color: '#39ff14', font: { family: 'Orbitron', size: 11 } } } }
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectId: '61b26696b0f6697163e79223' },
+              url: 'https://general-runtime.voiceflow.com',
+              voice: { url: 'https://runtime-api.voiceflow.com' }
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
+
+</body>
+</html>
