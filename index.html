@@ -9,29 +9,282 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700;900&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Fade-in Sayfa Giriş Animasyonu */
-        @keyframes fadeInScene {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInScene { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); } 50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 12px 4px rgba(57, 255, 20, 0.5); } 100% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.0); } }
+        @keyframes lineFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* Canlı Sistem İndikatörü Yanıp Sönme Animasyonu */
-        @keyframes pulseGlow {
-            0% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
-            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 12px 4px rgba(57, 255, 20, 0.5); }
-            100% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.0); }
-        }
-
-        /* Neon Çizgi Akış Animasyonu */
-        @keyframes lineFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Genel Kurumsal Siber Arayüz ve Kılavuz Çizgisi Dokusu */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Ana arka plan görseli üzerine siber mühendislik kılavuz çizgileri (grid) dokusu eklendi */
             background: linear-gradient(rgba(6, 9, 19, 0.92), rgba(6, 9, 19, 0.92)),
-                        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px
+                        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+                        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+                        url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2070') no-repeat center center fixed;
+            background-size: auto, 40px 40px, 40px 40px, cover;
+            color: #d1d5db;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            animation: fadeInScene 1s ease-out forwards;
+        }
+
+        .container { max-width: 1000px; margin: 50px auto; padding: 30px; }
+        .profile-section { text-align: center; margin-bottom: 30px; position: relative; }
+        
+        .status-indicator {
+            display: inline-flex; align-items: center; gap: 8px; background: rgba(11, 19, 43, 0.8);
+            border: 1px solid rgba(57, 255, 20, 0.3); padding: 6px 14px; border-radius: 20px;
+            font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #39ff14; margin-bottom: 20px; letter-spacing: 1px;
+        }
+        .status-dot { width: 8px; height: 8px; background-color: #39ff14; border-radius: 50%; animation: pulseGlow 2s infinite ease-in-out; }
+
+        .profile-img {
+            width: 130px; height: 130px; border-radius: 50%; border: 3px solid #00f0ff;
+            object-fit: cover; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;
+        }
+        
+        h1 { font-family: 'Orbitron', sans-serif; font-weight: 700; color: #00f0ff; font-size: 2.8rem; margin: 10px 0 5px 0; text-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
+        .subtitle { font-family: 'Fira Code', monospace; color: #39ff14; font-size: 1rem; font-weight: 600; margin-top: 0; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { font-family: 'Orbitron', sans-serif; color: #00f0ff; border-bottom: 1px solid rgba(0, 240, 255, 0.15); padding-bottom: 12px; margin-top: 45px; font-size: 1.5rem; letter-spacing: 1px; }
+
+        .social-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .social-btn { font-family: 'Fira Code', monospace; background-color: rgba(11, 19, 43, 0.6); border: 1px solid rgba(0, 240, 255, 0.4); color: #00f0ff; padding: 10px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 30px; text-decoration: none; transition: all 0.3s ease; }
+        .social-btn:hover { background-color: #00f0ff; color: #060913; box-shadow: 0 0 15px rgba(0, 240, 255, 0.6); transform: translateY(-2px); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .skills-card { background-color: rgba(11, 19, 43, 0.7); backdrop-filter: blur(5px); border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 10px; padding: 20px; }
+        .skills-card h3 { font-family: 'Orbitron', sans-serif; color: #39ff14; margin-top: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(57, 255, 20, 0.2); padding-bottom: 5px; }
+
+        .tech-badge-container { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+        .tech-badge { font-family: 'Fira Code', monospace; background-color: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.25); color: #00f0ff; font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; }
+
+        .dashboard-panel, .project-card, .ai-simulator-card { background-color: rgba(11, 19, 43, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 12px; padding: 26px; margin-top: 25px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .project-card:hover, .ai-simulator-card:hover { transform: translateY(-5px); border-color: #00f0ff; box-shadow: 0 5px 25px rgba(0, 240, 255, 0.3); }
+
+        .metric-title { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #39ff14; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .progress-bar-bg { background-color: rgba(28, 37, 65, 0.6); height: 8px; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, #00f0ff, #39ff14); height: 100%; border-radius: 4px; }
+
+        .project-details { margin-top: 12px; font-size: 0.95rem; color: #9ca3af; border-left: 2px solid #39ff14; padding-left: 10px; }
+        .project-details span { color: #39ff14; font-weight: 600; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+
+        hr { border: 0; height: 2px; background: linear-gradient(90deg, transparent, #00f0ff, #39ff14, transparent); background-size: 200% auto; animation: lineFlow 4s linear infinite; margin: 50px 0; }
+        .project-card strong, .ai-simulator-card strong { font-family: 'Orbitron', sans-serif; color: #ffffff; font-size: 1.3rem; letter-spacing: 0.5px; }
+        p { font-size: 1.05rem; color: #9ca3af; }
+
+        .btn { font-family: 'Fira Code', monospace; display: inline-block; background-color: rgba(31, 41, 55, 0.8); color: #00f0ff; padding: 9px 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid #00f0ff; border-radius: 6px; text-decoration: none; transition: all 0.2s ease; margin-top: 15px; }
+        .btn:hover { background-color: #00f0ff; color: #060913; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
+
+        /* YENİ: Yapay Zeka Simülatör Tasarım Öğeleri */
+        .sim-control { margin-bottom: 15px; }
+        .sim-control label { display: block; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #00f0ff; margin-bottom: 5px; }
+        .sim-slider { width: 100%; accent-color: #00f0ff; background: rgba(28, 37, 65, 0.6); border-radius: 5px; height: 6px; }
+        .sim-output-box { background: rgba(6, 9, 19, 0.8); border: 1px dashed #39ff14; border-radius: 8px; padding: 15px; margin-top: 20px; text-align: center; font-family: 'Fira Code', monospace; }
+        #prediction-result { font-weight: bold; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-section">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>SYSTEMS: OPERATIONAL</span>
+            </div>
+            <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena Beshiktepeli" class="profile-img">
+            <h1>Asena Beshiktepeli</h1>
+            <p class="subtitle">🛰️ Data Scientist & AI Engineer</p>
+            <p>Architecting end-to-end data pipelines, developing robust predictive models, and deploying production-grade analytical applications to drive business intelligence.</p>
+        </div>
+
+        <div class="social-container">
+            <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="social-btn">🔗 Professional LinkedIn</a>
+            <a href="https://www.kaggle.com/anesaa" target="_blank" class="social-btn">🛸 Kaggle Workspace</a>
+            <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="social-btn">✉️ Secure Mail</a>
+        </div>
+
+        <h2>🤖 Live ML Inference Engine (Simulator)</h2>
+        <div class="ai-simulator-card">
+            <strong>Waze User Churn Risk Calculator</strong>
+            <p style="font-size: 0.9rem;">Interact with the active deployment matrix below. This local JavaScript logic simulates the behavior of a trained Gradient Boosting classifier evaluating device telemetry in real-time.</p>
+            
+            <div class="sim-control">
+                <label>Monthly Driving Kilometers: <span id="km-val">3500</span> km</label>
+                <input type="range" min="500" max="8000" value="3500" class="sim-slider" id="km-slider">
+            </div>
+
+            <div class="sim-control">
+                <label>App Sessions This Month: <span id="sessions-val">25</span> sessions</label>
+                <input type="range" min="1" max="100" value="25" class="sim-slider" id="sessions-slider">
+            </div>
+
+            <div class="sim-output-box">
+                <span style="color: #9ca3af; font-size: 0.8rem;">INFERENCE IN PROGRESS // RESULT:</span>
+                <div id="prediction-result" style="color: #39ff14; margin-top: 5px;">CALCULATING...</div>
+            </div>
+        </div>
+
+        <h2>🛠️ Technical Competency Matrix</h2>
+        <div class="skills-grid">
+            <div class="skills-card">
+                <h3>Languages & Core</h3>
+                <div class="tech-badge-container">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">SQL</span>
+                </div>
+            </div>
+            <div class="skills-card">
+                <h3>Data Engineering</h3>
+                <div class="tech-badge-container">
+                    <span class="tech-badge">Pandas</span>
+                    <span class="tech-badge">Git Version Control</span>
+                </div>
+            </div>
+            <div class="skills-card">
+                <h3>Machine Learning</h3>
+                <div class="tech-badge-container">
+                    <span class="tech-badge">Scikit-Learn</span>
+                    <span class="tech-badge">Predictive Modeling</span>
+                </div>
+            </div>
+            <div class="skills-card">
+                <h3>Business Intelligence</h3>
+                <div class="tech-badge-container">
+                    <span class="tech-badge">Tableau Analytics</span>
+                </div>
+            </div>
+        </div>
+        
+        <h2>⚡ Core Architecture Status</h2>
+        <div class="dashboard-panel">
+            <div class="metric-title"><span>Advanced Algorithm Implementations</span><span>90%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+            
+            <div class="metric-title"><span>Predictive Modeling & Inference Optimization</span><span>75%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" style="width: 75%;"></div></div>
+            
+            <div class="metric-title"><span>Data Engineering & Telemetry Pipelines</span><span>80%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" style="width: 80%;"></div></div>
+        </div>
+
+        <hr>
+        
+        <h2>⚡ Core Infrastructure</h2>
+        <div class="project-card">
+            <strong>Data Science Engineering Hub</strong>
+            <p>A centralized repository compiling advanced modular Python object-oriented programming (OOP) modules, automation logic, and foundational computing scripts designed for end-to-end analytical scalability.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python Core</span>
+                <span class="tech-badge">Git Flow</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="btn">Deploy Repository</a>
+        </div>
+
+        <h2>🤖 Intelligent Systems & Machine Learning</h2>
+        <div class="project-card">
+            <strong>AI & Predictive Modeling Sandbox</strong>
+            <p>Advanced analytical testing ground dedicated to model evaluation, supervised learning algorithms, predictive telemetry, and scheduling autonomous algorithmic inference agents.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Machine Learning</span>
+                <span class="tech-badge">Scikit-Learn</span>
+                <span class="tech-badge">Statistical Inference</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="btn">Scan AI Workspace</a>
+        </div>
+
+        <h2>📊 Production-Grade Analytical Case Studies</h2>
+        
+        <div class="project-card">
+            <strong>Waze User Retention & Churn Optimization</strong>
+            <p>Integrated advanced exploratory data analysis (EDA) with statistical modeling to optimize user lifecycle values by isolating key churn drivers within device telemetry logs.</p>
+            <div class="project-details">
+                <span>EXECUTION //</span> Prevent customer loss by predicting telemetry-driven user exit behaviors.
+            </div>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Pandas</span>
+                <span class="tech-badge">Predictive Churn Modeling</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Waze_User_Churn_Project" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+
+        <div class="project-card">
+            <strong>TikTok Media Data Transformation Pipeline</strong>
+            <p>Engineered an extensive data cleaning and restructuring pipeline capable of transforming unstructured user interactions into structured arrays optimal for algorithm execution.</p>
+            <div class="project-details">
+                <span>EXECUTION //</span> Normalize chaotic media engagement variables into scalable ML-ready sets.
+            </div>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Data Engineering</span>
+                <span class="tech-badge">Data Transformation</span>
+                <span class="tech-badge">Pandas</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/TikTok_Data_Preparation_Project" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+
+        <div class="project-card">
+            <strong>NYC Transit Geospatial & Revenue Analytics</strong>
+            <p>Executed large-scale temporal and spatial regression models on complex inner-city transportation records to isolate variables predicting peak surge pricing corridors.</p>
+            <div class="project-details">
+                <span>EXECUTION //</span> Optimize fleet operations through comprehensive temporal trip revenue auditing.
+            </div>
+            <div class="tech-badge-container">
+                <span class="tech-badge">SQL Queries</span>
+                <span class="tech-badge">Spatial Regression</span>
+                <span class="tech-badge">Tableau Dashboards</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/NYC_Taxi_Analytics_Project" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+
+        <div class="project-card">
+            <strong>Global Venture Capital & Unicorn Market Dynamics</strong>
+            <p>Conducted high-level market intelligence analytics across international private venture funding datasets, tracking velocity trends and industry sector concentration hubs.</p>
+            <div class="project-details">
+                <span>EXECUTION //</span> Map startup capitalization patterns and sector growth distributions globally.
+            </div>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Market Intelligence</span>
+                <span class="tech-badge">Exploratory Data Analysis</span>
+                <span class="tech-badge">Tableau Visuals</span>
+            </div>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Unicorn-Analysis" target="_blank" class="btn">Extract Metrics</a>
+        </div>
+    </div>
+
+    <script>
+        const kmSlider = document.getElementById('km-slider');
+        const sessionsSlider = document.getElementById('sessions-slider');
+        const kmVal = document.getElementById('km-val');
+        const sessionsVal = document.getElementById('sessions-val');
+        const resultDiv = document.getElementById('prediction-result');
+
+        function updatePrediction() {
+            const km = parseInt(kmSlider.value);
+            const sessions = parseInt(sessionsSlider.value);
+            
+            kmVal.innerText = km;
+            sessionsVal.innerText = sessions;
+
+            // Yapay zeka mantığı simülasyonu: Sürüş mesafesi yüksek, uygulama seansı düşükse Churn (Ayrılma) olasılığı artar
+            let churnProbability = Math.min(100, Math.max(5, Math.round((km / 8000) * 60 + (100 - sessions) * 0.4)));
+
+            if (churnProbability > 70) {
+                resultDiv.innerHTML = `⚠️ CHURN RISK: ${churnProbability}% [CRITICAL EXIT BEHAVIOR]`;
+                resultDiv.style.color = '#ff3333';
+            } else if (churnProbability > 40) {
+                resultDiv.innerHTML = `⚡ CHURN RISK: ${churnProbability}% [MODERATE / MONITOR]`;
+                resultDiv.style.color = '#ffb300';
+            } else {
+                resultDiv.innerHTML = `✅ CHURN RISK: ${churnProbability}% [LOYAL USER PROFILE]`;
+                resultDiv.style.color = '#39ff14';
+            }
+        }
+
+        kmSlider.addEventListener('input', updatePrediction);
+        sessionsSlider.addEventListener('input', updatePrediction);
+        
+        // İlk açılışta çalıştır
+        updatePrediction();
+    </script>
+
+    </body>
+</html>
