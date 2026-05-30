@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
-    <title>Asena Beshiktepeli | AI Engineering Station</title>
+    <title>Asena Beshiktepeli | Sci-Fi HUD AI Station</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,9 @@
         :root {
             --cyber-orange: #ff9f00;
             --cyber-blue: #00f0ff;
+            --cyber-purple: #bd00ff;
             --cyber-neon: #39ff14;
-            --bg-dark: #050811;
+            --bg-dark: #040712;
         }
 
         #cyber-canvas {
@@ -25,7 +26,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #0b1528 0%, var(--bg-dark) 100%);
+            background: radial-gradient(circle at 50% 50%, #081124 0%, var(--bg-dark) 100%);
         }
 
         body {
@@ -46,52 +47,51 @@
             z-index: 1;
         }
 
-        /* MASTER PROFILE HUD */
+        /* CORE USER HUD CARD */
         .profile-card {
-            background: rgba(10, 20, 38, 0.4);
+            background: rgba(8, 16, 32, 0.4);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 159, 0, 0.2);
-            border-top: 3px solid var(--cyber-orange);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-top: 3px solid var(--cyber-blue);
             border-radius: 24px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 30px rgba(255, 159, 0, 0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0, 240, 255, 0.05);
             margin-bottom: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .profile-card:hover {
-            border-color: var(--cyber-blue);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(0, 240, 255, 0.15);
+            border-color: var(--cyber-purple);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 30px rgba(189, 0, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .profile-img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 3px solid var(--cyber-orange);
-            box-shadow: 0 0 30px rgba(255, 159, 0, 0.4);
-            object-fit: cover;
-            margin-bottom: 20px;
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 3px solid var(--cyber-blue);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+            object-fit: cover; margin-bottom: 20px;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin: 10px 0;
             letter-spacing: 2px;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 159, 0, 0.2);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
 
         .subtitle {
-            color: var(--cyber-blue);
+            color: var(--cyber-purple);
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(189, 0, 255, 0.4);
         }
 
         /* GRID CORES */
@@ -103,23 +103,24 @@
         }
 
         .cyber-panel {
-            background: rgba(11, 19, 36, 0.5);
+            background: rgba(6, 12, 26, 0.4);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
+            border: 1px solid rgba(0, 240, 255, 0.1);
             border-left: 4px solid var(--cyber-blue);
             border-radius: 16px;
             padding: 25px;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .cyber-panel:hover {
-            transform: translateY(-5px);
-            border-color: var(--cyber-orange);
-            border-left-color: var(--cyber-orange);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 159, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: var(--cyber-purple);
+            border-left-color: var(--cyber-purple);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 20px rgba(189, 0, 255, 0.15);
         }
         .cyber-panel.orange-theme { border-left-color: var(--cyber-orange); }
+        .cyber-panel.orange-theme:hover { border-color: var(--cyber-blue); border-left-color: var(--cyber-blue); }
 
         .panel-header {
             font-family: 'Orbitron', sans-serif;
@@ -132,62 +133,88 @@
         }
 
         .panel-status {
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--cyber-blue);
-            color: var(--cyber-blue);
+            font-size: 0.75rem; padding: 3px 8px; border-radius: 4px;
+            background: rgba(0,0,0,0.4); border: 1px solid var(--cyber-blue); color: var(--cyber-blue);
         }
         .orange-theme .panel-status { border-color: var(--cyber-orange); color: var(--cyber-orange); }
 
-        /* SLIDERS */
         .slider-container { margin: 15px 0; }
         .slider-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; }
         .slider-label span { color: #fff; }
-        .cyber-range { width: 100%; accent-color: var(--cyber-orange); background: rgba(0,0,0,0.5); height: 6px; border-radius: 3px; }
+        .cyber-range { width: 100%; accent-color: var(--cyber-blue); background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; }
+        .orange-theme .cyber-range { accent-color: var(--cyber-orange); }
 
-        /* DEVAASA INTERACTIVE MODAL (BÜYÜK EKRAN) */
+        /* HOLOGRAPHIC GLASSMORPHIC HUD MODAL (YENİ GÖRSEL STİLİ) */
         .cyber-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 6, 12, 0.96);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            background: rgba(2, 4, 10, 0.85);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             z-index: 9999; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.15, 0.85, 0.15, 1);
-            transform: scale(1.08);
+            opacity: 0; pointer-events: none; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .cyber-modal.active { opacity: 1; pointer-events: auto; transform: scale(1); }
+        .cyber-modal.active { opacity: 1; pointer-events: auto; }
 
         .modal-content {
-            width: 90%; max-width: 1000px; height: 80vh;
-            background: rgba(8, 14, 27, 0.85);
-            border: 2px solid var(--cyber-orange);
-            border-radius: 24px; padding: 40px; position: relative;
-            display: flex; flex-direction: column; justify-content: space-between;
-            box-shadow: 0 0 60px rgba(255, 159, 0, 0.25);
+            width: 85%; max-width: 1050px; height: 75vh;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid var(--cyber-blue);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 50px rgba(0, 240, 255, 0.1), inset 0 0 30px rgba(255,255,255,0.02);
+            border-radius: 28px; padding: 40px; position: relative;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .cyber-modal.active .modal-content { transform: scale(1) translateY(0); }
 
         .close-modal {
-            position: absolute; top: 25px; right: 30px; font-size: 2.5rem;
-            color: var(--cyber-orange); cursor: pointer; transition: color 0.2s;
+            position: absolute; top: 25px; right: 30px; font-size: 2.2rem;
+            color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.2s; z-index: 10;
         }
-        .close-modal:hover { color: #ffffff; text-shadow: 0 0 15px var(--cyber-orange); }
+        .close-modal:hover { color: var(--cyber-blue); text-shadow: 0 0 15px var(--cyber-blue); }
+
+        /* HUD GRAPHICS & ANIMATIONS */
+        .hud-left-panel { display: flex; flex-direction: column; justify-content: space-between; }
+        .hud-right-panel { display: flex; flex-direction: column; justify-content: space-between; background: rgba(0,0,0,0.3); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.03); }
+
+        /* VİRÜS / SES HALKASI SİMÜLASYONU (GÖRSELDEKİ SOLDAKİ YUVARLAK YER) */
+        .ai-radar-node {
+            width: 140px; height: 140px; border-radius: 50%;
+            border: 2px dashed var(--cyber-blue); margin: 20px auto;
+            position: relative; display: flex; align-items: center; justify-content: center;
+            animation: rotateNode 12s infinite linear;
+            box-shadow: 0 0 30px rgba(0,240,255,0.1);
+        }
+        @keyframes rotateNode { 100% { transform: rotate(360deg); } }
+        .ai-radar-node::before {
+            content: '🤖'; font-size: 2.5rem; animation: pulseEmoji 2s infinite alternate;
+        }
+        @keyframes pulseEmoji { 0% { transform: scale(0.9) rotate(-360deg); } 100% { transform: scale(1.1) rotate(-360deg); } }
+
+        /* YÜKSELEN VERİ SÜTUNLARI (GÖRSELDEKİ GRAFİK YAPISI) */
+        .hologram-bars { display: flex; align-items: flex-end; justify-content: space-between; height: 180px; padding: 10px 20px; border-bottom: 2px solid rgba(255,255,255,0.1); }
+        .holo-bar {
+            width: 14%; background: linear-gradient(to top, var(--cyber-purple), var(--cyber-blue));
+            border-radius: 4px 4px 0 0; height: 10%; transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
 
         .live-code-stream {
-            background: #010307; border-radius: 12px; padding: 20px;
-            font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--cyber-neon);
-            flex-grow: 1; overflow-y: auto; border: 1px dashed rgba(57, 255, 20, 0.2); margin-top: 25px;
+            background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;
+            font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--cyber-neon);
+            height: 120px; overflow-y: auto; border-left: 2px solid var(--cyber-neon);
         }
 
         /* BUTTONS & BADGES */
         .social-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
         .cyber-btn {
             background: rgba(0,0,0,0.3); border: 1px solid var(--cyber-blue); color: var(--cyber-blue);
-            padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.2s ease;
+            padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.2s ease; font-size: 0.85rem;
         }
         .cyber-btn:hover { background: var(--cyber-blue); color: #000; box-shadow: 0 0 20px var(--cyber-blue); }
         .matrix-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .matrix-badge { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; }
+        .matrix-badge { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -196,26 +223,26 @@
 
     <div class="container notranslate">
         
-        <div class="profile-card" onclick="openImmersiveModal('Asena Beshiktepeli Mainframe', 'Neural network structures initialized. Core database synchronized successfully. Predictive systems are fully online across all active cloud clusters.')">
-            <div class="panel-status" style="width: fit-content; margin: 0 auto 15px auto; border-color: var(--cyber-neon); color: var(--cyber-neon);">SYSTEM: ACTIVE</div>
+        <div class="profile-card" onclick="openHologramHUD('Asena Beshiktepeli Quantum Node', 'Neural synchronization complete. Mainframe operations streaming. Deploying multi-threaded machine learning clusters globally across hyper-secured network protocols.')">
+            <div class="panel-status" style="width: fit-content; margin: 0 auto 15px auto; border-color: var(--cyber-neon); color: var(--cyber-neon);">CORE HANDSHAKE: SUCCESS</div>
             <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena" class="profile-img">
             <h1>Asena Beshiktepeli</h1>
             <div class="subtitle">📡 Data Scientist & AI Engineer</div>
-            <p style="color: #94a3b8; max-width: 700px; margin: 0 auto; font-size: 0.9rem;">Building high-dimensional predictive pipelines, automated model monitoring networks, and visual artificial intelligence matrices.</p>
+            <p style="color: #94a3b8; max-width: 700px; margin: 0 auto; font-size: 0.9rem; line-height: 1.6;">Structuring automated forecasting frameworks, pipeline optimizations, and futuristic immersive digital user interface terminals.</p>
         </div>
 
         <div class="social-row">
             <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="cyber-btn">🔗 SECURE LINKEDIN</a>
-            <a href="https://www.kaggle.com/anesaa" target="_blank" class="cyber-btn" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">🛸 KAGGLE TERMINAL</a>
+            <a href="https://www.kaggle.com/anesaa" target="_blank" class="cyber-btn" style="border-color: var(--cyber-purple); color: var(--cyber-purple);">🛸 KAGGLE WORKSPACE</a>
             <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="cyber-btn">✉️ ENCRYPTED MAIL</a>
         </div>
 
-        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.2rem;">// DEPLOYED PREDICTIVE ENGINES</h2>
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; font-size: 1.2rem;">// SYSTEM INFERENCE CONTROLS</h2>
         <div class="cyber-grid">
-            <div class="cyber-panel" onclick="openImmersiveModal('Waze Attrition Core Logic', 'Loading log files... Executing Gradient Boosting Decision Tree optimization models. Evaluating telemetry distance arrays against critical driving velocity variables.')">
+            <div class="cyber-panel" onclick="openHologramHUD('Waze Predictive Analytics', 'Analyzing geolocation datasets... Running advanced Gradient Boosting routines. Mapping continuous highway navigation data to calculate real-time driver retention quotients.')">
                 <div class="panel-header">
-                    <span>Waze Churn Tracker</span>
-                    <span class="panel-status">GBM MODEL</span>
+                    <span>Waze Churn HUD</span>
+                    <span class="panel-status">GBM OPTIMIZED</span>
                 </div>
                 <div class="slider-container" onclick="event.stopPropagation()">
                     <div class="slider-label">Monthly Distance: <span id="km-lbl">3500 km</span></div>
@@ -228,68 +255,89 @@
                 <div id="waze-telemetry" style="margin-top: 15px; color: var(--cyber-neon); font-size: 0.85rem; font-weight: bold;">CALCULATING LOGS...</div>
             </div>
 
-            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('TikTok Audit Engine Terminal', 'Scanning multi-structured video log metrics. Running localized Random Forest filters to intercept content anomalies and generate instantaneous platform safety risk scores.')">
+            <div class="cyber-panel orange-theme" onclick="openHologramHUD('TikTok Audit Compliance', 'Interpreting complex content interactions. Executing non-linear decision forest parameters to automatically evaluate content threat probability levels.')">
                 <div class="panel-header">
-                    <span>TikTok Content Audit</span>
-                    <span class="panel-status">RISK MATRIX</span>
+                    <span>TikTok Integrity Monitor</span>
+                    <span class="panel-status">SAFETY MATRIX</span>
                 </div>
                 <div class="slider-container" onclick="event.stopPropagation()">
                     <div class="slider-label">Media Views: <span id="views-lbl">45,000</span></div>
-                    <input type="range" min="1000" max="500000" value="45000" class="cyber-range" id="views-range" style="accent-color: var(--cyber-blue);">
+                    <input type="range" min="1000" max="500000" value="45000" class="cyber-range" id="views-range">
                 </div>
                 <div class="slider-container" onclick="event.stopPropagation()">
                     <div class="slider-label">User Reports: <span id="reports-lbl">12</span></div>
-                    <input type="range" min="0" max="100" value="12" class="cyber-range" id="reports-range" style="accent-color: var(--cyber-blue);">
+                    <input type="range" min="0" max="100" value="12" class="cyber-range" id="reports-range">
                 </div>
-                <div id="tiktok-telemetry" style="margin-top: 15px; color: var(--cyber-orange); font-size: 0.85rem; font-weight: bold;">PROCESSING ENGINE...</div>
+                <div id="tiktok-telemetry" style="margin-top: 15px; color: var(--cyber-orange); font-size: 0.85rem; font-weight: bold;">PROCESSING PARAMS...</div>
             </div>
         </div>
 
-        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.2rem;">// EXPERTISE MATRICES</h2>
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; font-size: 1.2rem;">// COGNITIVE CAPABILITIES</h2>
         <div class="cyber-grid">
-            <div class="cyber-panel" onclick="openImmersiveModal('Languages & Core Specs', 'Compiling core language trees. Object-oriented development structures optimizing production data extraction routines smoothly.')">
+            <div class="cyber-panel" onclick="openHologramHUD('Core Languages Architecture', 'Running syntax compilation checks. Establishing optimized memory pipelines for multi-threaded microservice executions.')">
                 <div class="panel-header">Languages & Logic</div>
                 <div class="matrix-badges">
-                    <span class="matrix-badge" style="color: var(--cyber-blue);">Python (OOP)</span>
-                    <span class="matrix-badge">Advanced SQL</span>
+                    <span class="matrix-badge" style="color: var(--cyber-blue)">Python (OOP)</span>
+                    <span class="matrix-badge">Advanced SQL Grid</span>
                 </div>
             </div>
-            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('Data Pipelines & Flow', 'Structuring microservice configurations. Continuous orchestration routines cleaning, sorting, and delivering raw log variables into analytical pipelines.')">
+            <div class="cyber-panel orange-theme" onclick="openHologramHUD('Data Infrastructure Flow', 'Verifying continuous pipeline health scripts. Transforming unstructured stream logs into indexed queryable feature warehouses.')">
                 <div class="panel-header">Data Pipelines</div>
                 <div class="matrix-badges">
-                    <span class="matrix-badge" style="color: var(--cyber-orange);">Pandas & NumPy</span>
-                    <span class="matrix-badge">Git Version Controls</span>
+                    <span class="matrix-badge" style="color: var(--cyber-orange)">Pandas / NumPy</span>
+                    <span class="matrix-badge">Git Core Systems</span>
                 </div>
             </div>
-            <div class="cyber-panel" onclick="openImmersiveModal('Machine Learning Cluster', 'Evaluating architectural accuracy logs. Tuning hyperparameters via grid searches to construct stable forecasting systems.')">
+            <div class="cyber-panel" onclick="openHologramHUD('Machine Learning Nodes', 'Evaluating performance weights across validation arrays. Minimizing objective loss functions to guarantee predictive model stability.')">
                 <div class="panel-header">Machine Learning</div>
                 <div class="matrix-badges">
-                    <span class="matrix-badge" style="color: var(--cyber-neon);">Scikit-Learn</span>
-                    <span class="matrix-badge">Predictive Modelling</span>
+                    <span class="matrix-badge" style="color: var(--cyber-purple)">Scikit-Learn</span>
+                    <span class="matrix-badge">Predictive Automation</span>
                 </div>
             </div>
         </div>
 
-        <div class="cyber-panel" style="height: 340px; display: flex; justify-content: center; background: rgba(4,7,16,0.6);" onclick="openImmersiveModal('Telemetry Metrics Display', 'Fetching performance analytics across computing arrays. Balanced data architecture responding efficiently to operational requirements.')">
+        <div class="cyber-panel" style="height: 330px; display: flex; justify-content: center; background: rgba(3,6,15,0.5);" onclick="openHologramHUD('System Telemetry Analysis', 'Pulling telemetry performance logs from multi-tiered orchestration servers. Balance vectors operating within secure margins.')">
             <canvas id="radarTelemetry"></canvas>
         </div>
-
     </div>
 
     <div class="cyber-modal" id="immersiveModal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeImmersiveModal()">&times;</span>
-            <h2 id="modalTitle" style="font-family: 'Orbitron', sans-serif; color: #fff; margin: 0;">ACCESSING STATION...</h2>
-            <p id="modalDesc" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-top: 15px;"></p>
-            <div style="font-size: 0.75rem; color: var(--cyber-orange); margin-top: 20px;">[📡 LIVE MATRIX CORE PIPELINE FEED]</div>
-            <div class="live-code-stream" id="codeStream"></div>
+            <span class="close-modal" onclick="closeHologramHUD()">&times;</span>
+            
+            <div class="hud-left-panel">
+                <div>
+                    <h2 id="modalTitle" style="font-family: 'Orbitron', sans-serif; color: #fff; margin: 0; letter-spacing: 1px;">HUD ACCESS ACTIVE</h2>
+                    <p id="modalDesc" style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-top: 15px;"></p>
+                </div>
+                <div>
+                    <div style="font-size: 0.7rem; color: var(--cyber-blue); margin-bottom: 8px; font-weight: bold;">[📡 LIVE MATRIX CORE TERMINAL LOGS]</div>
+                    <div class="live-code-stream" id="codeStream"></div>
+                </div>
+            </div>
+
+            <div class="hud-right-panel">
+                <div>
+                    <div style="font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--cyber-purple); text-align: center; letter-spacing: 2px;">// QUANTUM NODE ACTIVE</div>
+                    <div class="ai-radar-node"></div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 5px; text-align: center;">DYNAMIC INFERENCE METRICS FEED</div>
+                    <div class="hologram-bars" id="holoBars">
+                        <div class="holo-bar"></div><div class="holo-bar"></div><div class="holo-bar"></div>
+                        <div class="holo-bar"></div><div class="holo-bar"></div><div class="holo-bar"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // AUDIO SYNTH CORE
+        // PREMIUM AUDIO SYNTH ENGINES
         let audioCtx = null;
-        function playSynthSound(freq, dur, type='sine') {
+        function playDeepSciFiSound(freq, dur, type='sine', volume=1) {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -297,66 +345,81 @@
                 let gain = audioCtx.createGain();
                 osc.type = type;
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(dur, audioCtx.currentTime);
+                gain.gain.setValueAtTime(volume * dur, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
                 osc.connect(gain); gain.connect(audioCtx.destination);
                 osc.start(); osc.stop(audioCtx.currentTime + dur);
             } catch(e){}
         }
 
-        // FULLSCREEN INTERACTIVE OPENER
-        function openImmersiveModal(title, text) {
-            playSynthSound(280, 0.1, 'square');
-            setTimeout(() => playSynthSound(560, 0.15, 'sine'), 70);
+        // SCI-FI HUD TERMINAL OPENER
+        function openHologramHUD(title, text) {
+            // Lüks fütüristik alt bass ve hologram ses patlaması
+            playDeepSciFiSound(90, 0.4, 'sawtooth', 0.3);
+            setTimeout(() => playDeepSciFiSound(580, 0.2, 'sine', 0.6), 80);
+            setTimeout(() => playDeepSciFiSound(880, 0.1, 'triangle', 0.4), 150);
             
             document.getElementById('modalTitle').innerText = `// ${title.toUpperCase()}`;
             document.getElementById('modalDesc').innerText = text;
+            
             const modal = document.getElementById('immersiveModal');
             modal.classList.add('active');
+
+            // Grafikleri canlandır (Görseldeki gibi hareketli çubuklar)
+            const bars = document.querySelectorAll('.holo-bar');
+            bars.forEach(b => {
+                b.style.height = Math.floor(Math.random() * 85 + 15) + '%';
+            });
             
             const stream = document.getElementById('codeStream');
             stream.innerHTML = '';
             let count = 0;
-            const matrixLogs = [
-                "import data_pipeline, tensorflow as tf", ">> Loading neural network weights matrix...",
-                "model.compile(optimizer='adam', loss='binary_crossentropy')", ">> Parameters validated. Validation accuracy: 98.24%",
-                "📡 Establishing encrypted link with remote processing arrays.", ">> Memory initialization block configured at zone 0x4F3B",
-                "[SUCCESS] Production stream pipeline fully operating.", ">> Tracking system variables for automated anomaly extraction..."
+            const sciFiLogs = [
+                "import framework_core, keras, torch", ">> Loading hyper-parameter layer checkpoints...",
+                "model.predict_dynamic_weights(array_logs)", ">> Evaluation matrices compiled with alpha index 0.05",
+                "📡 Syncing holographic layout parameters across visual layers.", ">> Graphics render block set at layer address 0xFF3D2",
+                "[HUD CONNECTED] Immersive terminal viewport fully initialized.", ">> Tracking operational variance metrics automatically..."
             ];
             
             let logInterval = setInterval(() => {
-                if(count < matrixLogs.length) {
-                    stream.innerHTML += matrixLogs[count] + "<br>";
+                if(count < sciFiLogs.length) {
+                    stream.innerHTML += sciFiLogs[count] + "<br>";
                     stream.scrollTop = stream.scrollHeight;
-                    playSynthSound(750 + (count * 40), 0.02, 'sine');
+                    playDeepSciFiSound(700 + (count * 60), 0.02, 'sine', 0.3);
+                    
+                    // Grafik çubuklarını yazı aktıkça hafifçe dans ettir
+                    bars[count % bars.length].style.height = Math.floor(Math.random() * 85 + 15) + '%';
                     count++;
                 } else { clearInterval(logInterval); }
-            }, 150);
+            }, 140);
             modal.dataset.intervalId = logInterval;
         }
 
-        function closeImmersiveModal() {
-            playSynthSound(190, 0.1, 'sawtooth');
+        function closeHologramHUD() {
+            playDeepSciFiSound(150, 0.2, 'sawtooth', 0.4);
             const modal = document.getElementById('immersiveModal');
             modal.classList.remove('active');
             clearInterval(modal.dataset.intervalId);
+            
+            // Grafikleri sıfırla
+            document.querySelectorAll('.holo-bar').forEach(b => b.style.height = '10%');
         }
 
-        // AMBIENT BACKGROUND MATRIX LINES
+        // BACKGROUND HOLOGRAPHIC FLOATING LINES
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
         let lines = [];
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
-        class GridLine {
+        class HudLine {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = canvas.height + Math.random() * 100;
-                this.speed = Math.random() * 1.2 + 0.4;
-                this.length = Math.random() * 70 + 30;
-                this.opacity = Math.random() * 0.2 + 0.04;
-                this.color = Math.random() > 0.5 ? '255, 159, 0' : '0, 240, 255';
+                this.speed = Math.random() * 1.4 + 0.4;
+                this.length = Math.random() * 90 + 30;
+                this.opacity = Math.random() * 0.18 + 0.03;
+                this.color = Math.random() > 0.5 ? '0, 240, 255' : '189, 0, 255';
             }
             move() { this.y -= this.speed; if (this.y < -this.length) { this.y = canvas.height + this.length; this.x = Math.random() * canvas.width; } }
             render() {
@@ -365,40 +428,40 @@
                 ctx.lineTo(this.x, this.y - this.length); ctx.stroke();
             }
         }
-        for(let i=0; i<50; i++) lines.push(new GridLine());
+        for(let i=0; i<45; i++) lines.push(new HudLine());
         function drawBackground() {
-            ctx.fillStyle = 'rgba(5, 8, 17, 0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = 'rgba(4, 7, 18, 0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
             lines.forEach(l => { l.move(); l.render(); });
             requestAnimationFrame(drawBackground);
         }
         drawBackground();
 
-        window.addEventListener('click', () => { playSynthSound(490, 0.02, 'sine'); });
+        window.addEventListener('click', () => { playDeepSciFiSound(440, 0.02, 'sine', 0.2); });
 
-        // MATHEMATICAL INFERENCE CALCULATORS
+        // MATHEMATICAL ALGORITHM LOGIC
         const kmR = document.getElementById('km-range'); const sR = document.getElementById('sessions-range');
         const vR = document.getElementById('views-range'); const rR = document.getElementById('reports-range');
 
         function updateWaze() {
             const km = parseInt(kmR.value); const s = parseInt(sR.value);
             document.getElementById('km-lbl').innerText = km + " km"; document.getElementById('sessions-lbl').innerText = s;
-            let score = Math.min(100, Math.max(5, Math.round((km/8000)*60 + (100-s)*0.4)));
+            let score = Math.min(100, Math.max(5, Math.round((km/8000)*55 + (100-s)*0.45)));
             let output = document.getElementById('waze-telemetry');
             if(score > 65) output.innerHTML = `⚠️ CHURN RISK WARNING: ${score}% [CRITICAL THREAT]`;
-            else output.innerHTML = `✅ NOMINAL MATRIX FLOW: RISK ${score}% [SECURE]`;
+            else output.innerHTML = `✅ NOMINAL COMPLIANCE: RISK ${score}% [SECURE]`;
         }
         function updateTikTok() {
             const v = parseInt(vR.value); const r = parseInt(rR.value);
             document.getElementById('views-lbl').innerText = v.toLocaleString(); document.getElementById('reports-lbl').innerText = r;
-            let score = Math.min(100, Math.max(0, Math.round((r*0.8) + (v/500000)*20)));
+            let score = Math.min(100, Math.max(0, Math.round((r*0.85) + (v/500000)*15)));
             let output = document.getElementById('tiktok-telemetry');
-            if(score > 60) output.innerHTML = `🚨 VIOLATION ANOMALY DETECTED: RISK ${score}%`;
-            else output.innerHTML = `🟢 COMPLIANCE CONFIRMED: FAULT RISK AT ${score}%`;
+            if(score > 60) output.innerHTML = `🚨 AUDIT ANOMALY DETECTED: RISK ${score}%`;
+            else output.innerHTML = `🟢 SAFE CLASSIFICATION: RISK AT ${score}%`;
         }
-        kmR.addEventListener('input', () => { updateWaze(); playSynthSound(380, 0.01); });
-        sR.addEventListener('input', () => { updateWaze(); playSynthSound(400, 0.01); });
-        vR.addEventListener('input', () => { updateTikTok(); playSynthSound(420, 0.01); });
-        rR.addEventListener('input', () => { updateTikTok(); playSynthSound(440, 0.01); });
+        kmR.addEventListener('input', () => { updateWaze(); playDeepSciFiSound(350, 0.01, 'sine', 0.3); });
+        sR.addEventListener('input', () => { updateWaze(); playDeepSciFiSound(370, 0.01, 'sine', 0.3); });
+        vR.addEventListener('input', () => { updateTikTok(); playDeepSciFiSound(390, 0.01, 'sine', 0.3); });
+        rR.addEventListener('input', () => { updateTikTok(); playDeepSciFiSound(410, 0.01, 'sine', 0.3); });
         updateWaze(); updateTikTok();
 
         // TELEMETRY RADAR ENGINE
@@ -407,19 +470,19 @@
             new Chart(rCtx, {
                 type: 'radar',
                 data: {
-                    labels: ['Algorithms', 'Data Optimization', 'Pipelines', 'Predictive Logic', 'Statistics Grid'],
+                    labels: ['Machine Learning', 'Data Optimization', 'Pipelines', 'Predictive Systems', 'Advanced Analytics'],
                     datasets: [{
-                        label: 'Core Allocation Metrics (%)',
-                        data: [94, 80, 88, 91, 87],
-                        backgroundColor: 'rgba(255, 159, 0, 0.02)',
-                        borderColor: '#ff9f00',
-                        pointBackgroundColor: '#00f0ff',
+                        label: 'Holographic Node Allocation (%)',
+                        data: [95, 82, 89, 93, 86],
+                        backgroundColor: 'rgba(0, 240, 255, 0.01)',
+                        borderColor: '#00f0ff',
+                        pointBackgroundColor: '#bd00ff',
                         borderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    scales: { r: { grid: { color: 'rgba(255,255,255,0.03)' }, angleLines: { color: 'rgba(255,159,0,0.1)' }, pointLabels: { color: '#94a3b8', font: { family: 'Fira Code', size: 10 } }, ticks: { display: false } } },
+                    scales: { r: { grid: { color: 'rgba(255,255,255,0.03)' }, angleLines: { color: 'rgba(0,240,255,0.08)' }, pointLabels: { color: '#94a3b8', font: { family: 'Fira Code', size: 10 } }, ticks: { display: false } } },
                     plugins: { legend: { labels: { color: '#ffffff', font: { family: 'Orbitron', size: 11 } } } }
                 }
             });
@@ -436,8 +499,7 @@
                     versionID: 'production'
                 });
             };
-            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; 
-            v.type = "text/javascript";
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript";
             s.parentNode.insertBefore(v, s);
         })(document, 'script');
     </script>
