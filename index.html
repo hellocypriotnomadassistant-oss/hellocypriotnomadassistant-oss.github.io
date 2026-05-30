@@ -8,8 +8,7 @@
         /* Gelişmiş Arka Plan ve Cam Efekti Ayarları */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Arka plan görseli - Klasöründeki arkaplan.jpg ile eşleşir */
-            background: linear-gradient(rgba(6, 9, 19, 0.85), rgba(6, 9, 19, 0.85)), 
+            background: linear-gradient(rgba(6, 9, 19, 0.88), rgba(6, 9, 19, 0.88)), 
                         url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2070') no-repeat center center fixed;
             background-size: cover;
             color: #d1d5db;
@@ -26,11 +25,11 @@
         /* Profil Fotoğrafı ve Başlık Alanı */
         .profile-section {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             border: 3px solid #00f0ff;
             object-fit: cover;
@@ -53,10 +52,54 @@
             letter-spacing: 1px;
         }
 
+        /* Sosyal Medya İletişim Butonları */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            background-color: rgba(11, 19, 43, 0.6);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            color: #00f0ff;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            background-color: #00f0ff;
+            color: #060913;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Teknoloji Etiketleri (Badges) */
+        .tech-badge-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .tech-badge {
+            background-color: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            color: #39ff14;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
         /* Cam Efektli (Glassmorphism) Modern Kartlar */
         .dashboard-panel, .project-card {
-            background-color: rgba(11, 19, 43, 0.75); /* Hafif şeffaf arka plan */
-            backdrop-filter: blur(10px); /* Arka planı bulandırma (Cam Efekti) */
+            background-color: rgba(11, 19, 43, 0.75);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 240, 255, 0.15);
             border-radius: 12px;
@@ -118,13 +161,14 @@
             display: inline-block;
             background-color: rgba(31, 41, 55, 0.8);
             color: #00f0ff;
-            padding: 10px 20px;
-            font-size: 0.9rem;
+            padding: 8px 18px;
+            font-size: 0.85rem;
             font-weight: 600;
             border: 1px solid #00f0ff;
             border-radius: 6px;
             text-decoration: none;
             transition: all 0.2s ease;
+            margin-top: 15px;
         }
         .btn:hover {
             background-color: #00f0ff;
@@ -140,12 +184,18 @@
             <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena Beshiktepeli" class="profile-img">
             <h1>Hello, I'm Asena</h1>
             <p class="subtitle">🛰️ Data Analyst & AI Systems Explorer</p>
-            <p>Welcome to my digital flight deck. I deploy data pipelines, build analytical models, and document my advanced machine learning journey right here.</p>
+            <p>Welcome to my digital flight deck. I deploy production-ready data pipelines, build rigorous analytical models, and explore advanced machine learning frameworks.</p>
+        </div>
+
+        <div class="social-container">
+            <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="social-btn">🔗 LinkedIn</a>
+            <a href="https://www.kaggle.com/anesaa" target="_blank" class="social-btn">🛸 Kaggle Profile</a>
+            <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="social-btn">✉️ Contact Email</a>
         </div>
         
         <h2>🛸 Core Systems Status</h2>
         <div class="dashboard-panel">
-            <div class="metric-title"><span>Python & Data Analysis Structures</span><span>90%</span></div>
+            <div class="metric-title"><span>Python & Advanced Data Structures</span><span>90%</span></div>
             <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
             
             <div class="metric-title"><span>Predictive Modeling & AI Sandbox</span><span>75%</span></div>
@@ -160,14 +210,24 @@
         <h2>⚡ Core Learning & Structures</h2>
         <div class="project-card">
             <strong>🚀 Data Science Journey</strong>
-            <p>A curated collection of modular programming structures, Python scripts, and advanced data analysis frameworks developed during my learning path.</p>
+            <p>A curated engineering infrastructure containing modular Python object-oriented programming (OOP) structures, automated scripts, and exploratory data analysis frameworks.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Git</span>
+            </div>
+            <br>
             <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="btn">Launch Repository</a>
         </div>
 
         <h2>🤖 Artificial Intelligence & Machine Learning</h2>
         <div class="project-card">
             <strong>🛰️ AI & Predictive Modeling Sandbox</strong>
-            <p>Upcoming deployments of Machine Learning models, Natural Language Processing (NLP) pipelines, and intelligent automation agents. Code and live demos coming soon.</p>
+            <p>Upcoming engineering deployments focusing on fine-tuning Large Language Models (LLMs), training supervised classification algorithms, and scheduling automated inference agents.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Scikit-Learn</span>
+            </div>
+            <br>
             <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="btn">Scan AI Repositories</a>
         </div>
 
@@ -175,25 +235,47 @@
         
         <div class="project-card">
             <strong>🚗 Waze User Churn Project</strong>
-            <p>Analysis of user retention and churn rates for Waze. Built with exploratory data analysis (EDA) and predictive modeling approaches.</p>
+            <p>Advanced exploratory data analysis (EDA) and predictive churn modeling to optimize user retention metrics and uncover behavioral trends within telemetry data.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Pandas</span>
+                <span class="tech-badge">Scikit-Learn</span>
+            </div>
+            <br>
             <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Waze_User_Churn_Project" target="_blank" class="btn">Inspect Metrics</a>
         </div>
 
         <div class="project-card">
             <strong>🎵 TikTok Data Preparation Project</strong>
-            <p>Data cleaning, structuring, and preparation pipeline focusing on user engagement metrics and content classification analysis.</p>
+            <p>End-to-end data engineering and cleaning pipeline to transform chaotic engagement metrics and user video variables into clean datasets optimized for machine learning algorithms.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Pandas</span>
+            </div>
+            <br>
             <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/TikTok_Data_Preparation_Project" target="_blank" class="btn">Inspect Metrics</a>
         </div>
 
         <div class="project-card">
             <strong>🚕 NYC Taxi Analytics Project</strong>
-            <p>Spatial and temporal analysis of New York City taxi rides. Includes distance calculations, trip durations, and revenue optimization visualizations.</p>
+            <p>Large-scale spatial and temporal regression analysis on NYC ride-hailing data. Investigated distance, high-yield revenue patterns, and dynamic temporal factors.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">SQL</span>
+                <span class="tech-badge">Tableau</span>
+            </div>
+            <br>
             <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/NYC_Taxi_Analytics_Project" target="_blank" class="btn">Inspect Metrics</a>
         </div>
 
         <div class="project-card">
             <strong>🦄 Unicorn Companies Analysis</strong>
-            <p>Comprehensive data analysis exploring privately held startup companies valued at over $1 billion, focusing on industry distributions and funding insights.</p>
+            <p>Strategic macro-level data analysis on billion-dollar startup funding distributions, private market venture capital trends, and global industry hubs.</p>
+            <div class="tech-badge-container">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Tableau</span>
+            </div>
+            <br>
             <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Unicorn-Analysis" target="_blank" class="btn">Inspect Metrics</a>
         </div>
     </div>
