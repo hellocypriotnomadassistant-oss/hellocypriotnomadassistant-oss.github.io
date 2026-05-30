@@ -26,18 +26,17 @@
             overflow-x: hidden;
         }
 
-        /* CINEMATIC HIGH-END LAB BACKGROUND */
+        /* CINEMATIC SCI-FI LAB BACKDROP (2. Görseldeki o loş laboratuvar atmosferi) */
         #scifi-ambient-backdrop {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            /* 2. Görseldeki o loş sinematik ofis/laboratuvar derinlik hissini veren siber gradyan motoru */
             background: 
                 radial-gradient(circle at 80% 20%, rgba(13, 27, 42, 0.6) 0%, transparent 50%),
                 radial-gradient(circle at 20% 80%, rgba(2, 48, 71, 0.4) 0%, transparent 60%),
                 linear-gradient(180deg, #030712 0%, #08162b 50%, #020612 100%);
         }
 
-        /* TECH BOOT SCREEN (ORAL HANDSHAKE) */
+        /* TECH INITIALIZING GATE */
         #mainframe-gate {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #01040a; z-index: 99999; display: flex; align-items: center; justify-content: center;
@@ -59,7 +58,7 @@
         }
         .connect-trigger:hover { background: var(--neon-cyan); color: #000; text-shadow: none; box-shadow: 0 0 35px var(--neon-cyan); }
 
-        /* VIRTUAL GLASS WORKSTATION LAB (2. GÖRSELDEKİ TAM DİK, NET SEKTÖR DİZİLİMİ) */
+        /* VIRTUAL GLASS WORKSTATION LAB (Tam dikey ve kusursuz hizalama) */
         .lab-station {
             max-width: 1350px; margin: 0 auto; padding: 60px 20px;
             display: flex; flex-direction: column; gap: 30px;
@@ -67,15 +66,15 @@
 
         /* VERTICAL GLOWING NEON GLASS PANELS */
         .glass-hud {
-            background: linear-gradient(135deg, rgba(5, 19, 43, 0.4) 0%, rgba(1, 6, 18, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(5, 19, 43, 0.45) 0%, rgba(1, 6, 18, 0.25) 100%);
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(0, 240, 255, 0.2);
+            border: 1px solid rgba(0, 240, 255, 0.22);
             border-radius: 16px; padding: 35px; position: relative;
             box-shadow: 0 40px 80px rgba(0,0,0,0.7), inset 0 0 20px rgba(0,240,255,0.02);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        /* Masanın üzerine basan o efsanevi siber ışık yansıması (Table Reflection Effect) */
+        /* Masaya vuran siber parıltı tabanı (Table Reflection Effect) */
         .glass-hud::after {
             content: ''; position: absolute; bottom: 0; left: 5%; width: 90%; height: 2px;
             background: linear-gradient(to right, transparent, var(--neon-cyan), transparent);
@@ -83,7 +82,7 @@
         }
 
         .glass-hud:hover {
-            transform: translateY(-8px) scale(1.01);
+            transform: translateY(-6px) scale(1.005);
             border-color: rgba(0, 240, 255, 0.45);
             box-shadow: 0 50px 100px rgba(0,0,0,0.85), 0 0 35px rgba(0, 240, 255, 0.15);
         }
@@ -96,14 +95,11 @@
 
         .trio-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(390px, 1fr)); gap: 30px; }
 
-        /* DATA MANIPULATION RANGE SLIDERS */
+        /* DATA SLIDERS */
         .panel-slider-box { margin-bottom: 22px; }
         .panel-slider-box label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px; }
         .panel-slider-box span { color: var(--neon-cyan); font-weight: 600; }
         .panel-input { width: 100%; accent-color: var(--neon-cyan); background: rgba(0,0,0,0.5); height: 4px; border-radius: 2px; outline: none; cursor: pointer; }
-
-        /* METRIC BADGES */
-        .capsule-badge { background: rgba(0, 240, 255, 0.03); border: 1px solid rgba(0,240,255,0.15); padding: 8px 16px; border-radius: 6px; font-size: 0.75rem; color: #cbd5e1; font-weight: bold; }
 
         .terminal-anchor {
             padding: 13px 28px; border: 1px solid var(--neon-cyan); background: transparent;
@@ -112,7 +108,7 @@
         }
         .terminal-anchor:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 25px var(--neon-cyan); }
 
-        /* IMMERSIVE STREAM SUB-WINDOW */
+        /* HOLOGRAPHIC MODAL WINDOW */
         .hologram-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(2, 4, 10, 0.95); backdrop-filter: blur(30px);
@@ -130,13 +126,14 @@
             border-left: 3px solid var(--neon-green); margin-top: 25px; line-height: 1.7;
         }
 
-        /* LIVE PERFORMANCE METRICS DISPLAY (`image_06683b.png` Entegrasyonu) */
+        /* ACCURACY PERFORMANCE STATS */
         .performance-summary {
-            display: flex; gap: 40px; margin-bottom: 20px; background: rgba(0,0,0,0.3); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);
+            display: flex; gap: 20px; justify-content: space-between; margin-bottom: 20px; 
+            background: rgba(0,0,0,0.4); padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(0, 240, 255, 0.15);
         }
         .metric-stat-box { font-family: 'Orbitron'; }
-        .metric-stat-box .num { font-size: 1.8rem; font-weight: 900; color: var(--neon-green); text-shadow: 0 0 10px rgba(57,255,20,0.2); }
-        .metric-stat-box .lbl { font-size: 0.7rem; color: #64748b; letter-spacing: 1px; margin-top: 2px; }
+        .metric-stat-box .num { font-size: 1.8rem; font-weight: 900; }
+        .metric-stat-box .lbl { font-size: 0.65rem; color: #64748b; letter-spacing: 0.5px; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -188,7 +185,7 @@
             <div class="glass-hud" onclick="launchHologramNode('TikTok Platform Integrity Hub', 'Parsing dynamic real-time reporting data streams. Random Forest estimators cross-examine non-linear safe thresholds.')">
                 <div class="hud-banner"><span>TIKTOK AUDIT MODULE</span> <small style="color: var(--neon-amber); font-size: 0.75rem;">RANDOM FOREST LAYER</small></div>
                 <div class="panel-slider-box" onclick="event.stopPropagation()">
-                    <label>Media Views Hacmi: <span id="v-display">45,000</span></label>
+                    <label>Media Views Volume: <span id="v-display">45,000</span></label>
                     <input type="range" min="1000" max="500000" value="45000" class="panel-input" id="v-slider" style="accent-color: var(--neon-amber);">
                 </div>
                 <div class="panel-slider-box" onclick="event.stopPropagation()">
@@ -198,17 +195,21 @@
                 <div id="tiktok-log-line" style="color: var(--neon-amber); font-size: 0.85rem; font-weight: bold; margin-top: 15px;">RUNNING DATASTREAMS...</div>
             </div>
 
-            <div class="glass-hud" onclick="launchHologramNode('Model Performance Growth Mainframe', 'System telemetry indicates highly balanced hyper-parameter curves across multiple validation sets.')">
-                <div class="hud-banner"><span>PERFORMANCE METRICS</span></div>
+            <div class="glass-hud" onclick="launchHologramNode('Model Performance Growth Mainframe', 'System telemetry indicates highly balanced hyper-parameter curves across 47 individual validated machine learning competitions.')">
+                <div class="hud-banner"><span>PERFORMANCE METRICS</span> <small style="color: var(--neon-green); font-size: 0.75rem;">LIVE TELEMETRY</small></div>
                 
                 <div class="performance-summary">
                     <div class="metric-stat-box">
-                        <div class="num">+25%</div>
-                        <div class="lbl">RANKING GROWTH</div>
+                        <div class="num" style="color: #39ff14; text-shadow: 0 0 10px #39ff14;">+25%</div>
+                        <div class="lbl">RANKING GROWTH <span style="color:#39ff14;">↑ YoY</span></div>
                     </div>
-                    <div class="metric-stat-box" style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
-                        <div class="num">91.4%</div>
+                    <div class="metric-stat-box" style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
+                        <div class="num" style="color: #00f0ff; text-shadow: 0 0 10px #00f0ff;">91.4%</div>
                         <div class="lbl">ACCURACY SCORE</div>
+                    </div>
+                    <div class="metric-stat-box" style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
+                        <div class="num" style="color: #ff9f00; text-shadow: 0 0 10px #ff9f00;">47</div>
+                        <div class="lbl">COMPETITIONS</div>
                     </div>
                 </div>
 
@@ -232,7 +233,7 @@
         let premiumAudioCtx = null;
         let ambientHumOsc = null;
 
-        // HIGH-END NATURAL SCI-FI FREQUENCY ENGINE
+        // CINEMATIC SFX SYNTHESIZER
         function triggerSpatialSound(frequency, duration, type='sine', volume=0.15, sweep=0) {
             try {
                 if (!premiumAudioCtx) premiumAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -259,7 +260,7 @@
             } catch(e) {}
         }
 
-        // LABORATORY BACKGROUND COCKPIT HUM
+        // COCKPIT HUM BACKGROUND DRONE
         function startLaboratoryHum() {
             try {
                 if (!premiumAudioCtx) premiumAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -267,7 +268,7 @@
                 let humGain = premiumAudioCtx.createGain();
                 
                 ambientHumOsc.type = 'sine';
-                ambientHumOsc.frequency.setValueAtTime(60, premiumAudioCtx.currentTime); // Toğu pürüzsüz laboratuvar frekansı
+                ambientHumOsc.frequency.setValueAtTime(60, premiumAudioCtx.currentTime);
                 
                 humGain.gain.setValueAtTime(0.03, premiumAudioCtx.currentTime);
                 
@@ -277,20 +278,18 @@
             } catch(e){}
         }
 
-        // NATURAL CINEMATIC ENGLISH SPEECH MOTOR (DOĞAL VE AKICI İNGİLİZCE ROBOTİK KARŞILAMA)
+        // NATURAL CINEMATIC VOCODER SPEECH MOTOR (İleri Düzey Akıcı İngilizce Karşılama)
         function triggerEnglishVoiceWelcome() {
             if ('speechSynthesis' in window) {
-                // Tarayıcının arka planda ses motorunu tamamen temizle
-                window.speechSynthesis.cancel();
+                window.speechSynthesis.cancel(); // Önceki tüm kuyrukları temizle
                 
                 let welcomeText = new SpeechSynthesisUtterance("Mainframe initialized. Secure connection established. Welcome back, Operator Asena.");
                 welcomeText.lang = 'en-US';
-                welcomeText.pitch = 0.9; // Sinematik, tok ve lüks frekans ayarı
-                welcomeText.rate = 0.92; // Heyecanlı değil, ağırbaşlı Hollywood yapay zeka tonlaması
+                welcomeText.pitch = 0.92; // Pürüzsüz, premium frekans aralığı
+                welcomeText.rate = 0.90;  // Ağırbaşlı, lüks film hızı
                 
-                // En doğal İngilizce sesi (varsa Google/Microsoft premium) bulup eşleme algoritması
                 let voices = window.speechSynthesis.getVoices();
-                let premiumVoice = voices.find(v => v.lang.includes('en-US') && v.name.includes('Natural'));
+                let premiumVoice = voices.find(v => v.lang.includes('en-US') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Zira')));
                 if (!premiumVoice) premiumVoice = voices.find(v => v.lang.includes('en-US'));
                 if (premiumVoice) welcomeText.voice = premiumVoice;
 
@@ -298,7 +297,7 @@
             }
         }
 
-        // AUTHORIZE ACCESS
+        // START STATION ENGINE
         function authorizeStationCore() {
             triggerSpatialSound(60, 1.6, 'sawtooth', 0.25, -20);
             setTimeout(() => triggerSpatialSound(170, 0.6, 'sine', 0.2, 110), 200);
@@ -311,7 +310,7 @@
             document.getElementById('mainframe-gate').classList.add('authorized');
         }
 
-        // MODAL INTERACTION LOGIC
+        // TERMINAL STREAM LOGIC
         function launchHologramNode(title, description) {
             triggerSpatialSound(460, 0.18, 'sine', 0.15, 180);
             setTimeout(() => triggerSpatialSound(820, 0.12, 'sine', 0.25), 60);
@@ -343,7 +342,7 @@
             document.getElementById('hologramReportModal').style.display = 'none';
         }
 
-        // MATH LAB LOGIC METRICS
+        // SIMULATOR COMPUTE ENGINE
         const kmS = document.getElementById('km-slider'), sS = document.getElementById('s-slider');
         const vS = document.getElementById('v-slider'), rS = document.getElementById('r-slider');
 
@@ -360,16 +359,14 @@
             document.getElementById('tiktok-log-line').innerText = quotient > 55 ? `🚨 PLATFORM INTEGRITY ALERT RISK: ${quotient}%` : `🟢 INFERENCE METRIC COMPLIANT: RISK AT ${quotient}%`;
         }
 
-        // Micro digital audio ticks on slide interaction
         kmS.oninput = () => { recomputeWaze(); triggerSpatialSound(620, 0.01, 'sine', 0.08); };
         sS.oninput = () => { recomputeWaze(); triggerSpatialSound(640, 0.01, 'sine', 0.08); };
         vS.oninput = () => { recomputeTikTok(); triggerSpatialSound(660, 0.01, 'sine', 0.08); };
         rS.oninput = () => { recomputeTikTok(); triggerSpatialSound(680, 0.01, 'sine', 0.08); };
         recomputeWaze(); recomputeTikTok();
 
-        // LINEAR PERFORMANCE CHART ARCHITECTURE (`image_06683b.png` Yeniden Doğuşu)
+        // CHART ARCHITECTURE (Görseldeki Yükselen Öğrenme Eğrisi)
         document.addEventListener("DOMContentLoaded", function() {
-            // Tarayıcının sesleri hazırlaması için tetikleyici
             if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
             
             const gCtx = document.getElementById('growthLinearChart').getContext('2d');
@@ -383,15 +380,17 @@
                         backgroundColor: 'rgba(0, 240, 255, 0.04)',
                         borderWidth: 3,
                         pointBackgroundColor: '#39ff14',
-                        pointRadius: 4,
+                        pointBorderColor: '#020612',
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
                         fill: true,
-                        tension: 0.35
+                        tension: 0.3
                     }]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     scales: {
-                        x: { grid: { display: false }, ticks: { color: '#64748b', font: { family: 'Fira Code', size: 9 } } },
+                        x: { grid: { color: 'rgba(255,255,255,0.02)' }, ticks: { color: '#64748b', font: { family: 'Fira Code', size: 9 } } },
                         y: { min: 55, max: 95, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#64748b', font: { family: 'Fira Code', size: 9 } } }
                     },
                     plugins: { legend: { display: false } }
