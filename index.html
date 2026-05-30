@@ -4,331 +4,373 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
-    <title>Asena Beshiktepeli | 3D Holographic AI Station</title>
+    <title>Asena Beshiktepeli | Advanced Immersive Mainframe</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
+            --hologram-glow: rgba(0, 240, 255, 0.25);
             --cyber-blue: #00f0ff;
             --cyber-orange: #ff9f00;
             --cyber-purple: #bd00ff;
             --cyber-neon: #39ff14;
-            --bg-deep: #02040a;
+            --bg-void: #01040a;
         }
 
-        /* 3D PERSPEKTİF AYARI */
         html, body {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: var(--bg-deep);
+            background-color: var(--bg-void);
             color: #e2e8f0; font-family: 'Fira Code', monospace;
             overflow-x: hidden;
-            perspective: 1200px; /* Görseldeki derinlik hissini bu sağlar */
+            perspective: 1400px; /* Derinlik katsayısı optimize edildi */
         }
 
         #cyber-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: radial-gradient(circle at 50% 80%, #0c1a3d 0%, var(--bg-deep) 100%);
+            z-index: -1; background: radial-gradient(circle at 50% 85%, #071330 0%, var(--bg-void) 100%);
         }
 
-        /* GİRİŞ EKRANI (BOOT) */
+        /* INITIALIZING HANDSHAKE SCREEN */
         #boot-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #010206; z-index: 10000; display: flex; align-items: center; justify-content: center;
-            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+            background: #02050d; z-index: 10000; display: flex; align-items: center; justify-content: center;
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        #boot-screen.hide { transform: translateY(-100%); opacity: 0; }
+        #boot-screen.hide { transform: scale(1.1) translateY(-100%); opacity: 0; pointer-events: none; }
+
+        .boot-box {
+            border: 1px solid var(--cyber-blue); background: rgba(0,0,0,0.8);
+            border-radius: 16px; padding: 40px; text-align: center; max-width: 480px;
+            box-shadow: 0 0 50px rgba(0,240,255,0.15);
+        }
 
         .boot-btn {
-            background: transparent; border: 1px solid var(--cyber-blue); color: var(--cyber-blue);
-            padding: 20px 40px; font-family: 'Orbitron'; font-weight: 900; cursor: pointer;
-            box-shadow: 0 0 20px rgba(0,240,255,0.2); animation: pulse 2s infinite;
+            background: transparent; border: 2px solid var(--cyber-blue); color: var(--cyber-blue);
+            padding: 18px 45px; font-family: 'Orbitron'; font-weight: 900; letter-spacing: 3px;
+            font-size: 1rem; border-radius: 8px; cursor: pointer; margin-top: 25px;
+            transition: all 0.3s; text-shadow: 0 0 10px var(--cyber-blue);
         }
-        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; box-shadow: 0 0 40px var(--cyber-blue); } }
+        .boot-btn:hover { background: var(--cyber-blue); color: #000; text-shadow: none; box-shadow: 0 0 30px var(--cyber-blue); }
 
-        /* ANA İSTASYON KONTEYNERI (EĞİMLİ YAPI) */
-        .station-wrapper {
-            max-width: 1200px; margin: 0 auto; padding: 100px 20px;
+        /* ADVANCED WORKSTATION WRAPPER */
+        .station-container {
+            max-width: 1250px; margin: 0 auto; padding: 80px 20px;
             transform-style: preserve-3d;
-            transform: rotateX(8deg); /* Panelleri görseldeki gibi hafif geriye yatırır */
+            transform: rotateX(11deg) translateY(-10px); /* Resimlerdeki kusursuz siber eğim açısı */
         }
 
-        /* HOLOGRAM PANEL STİLLERİ (GLASSMORPHISM) */
-        .holo-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 20px; padding: 30px; margin-bottom: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(0,240,255,0.05);
+        /* PREMIUM GLASSMORPHISM HUD PANELS */
+        .hud-card {
+            background: linear-gradient(135deg, rgba(4, 12, 32, 0.4) 0%, rgba(2, 6, 18, 0.2) 100%);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 20px; padding: 35px; margin-bottom: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 25px rgba(0,240,255,0.03);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden; cursor: pointer;
-        }
-        .holo-panel::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0,240,255,0.05), transparent);
-            transform: rotate(45deg); animation: scan 8s infinite linear;
-        }
-        @keyframes scan { 0% { transform: translate(-50%, -50%) rotate(45deg); } 100% { transform: translate(50%, 50%) rotate(45deg); } }
-
-        .holo-panel:hover {
-            transform: translateZ(30px) rotateX(-2deg);
-            border-color: var(--cyber-blue);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 30px rgba(0,240,255,0.1);
+            position: relative;
         }
 
-        /* PANEL BAŞLIKLARI */
-        .panel-title {
-            font-family: 'Orbitron'; font-size: 1.1rem; color: #fff;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid rgba(0,240,255,0.2); padding-bottom: 15px; margin-bottom: 20px;
+        /* PROJERSİYON MASASI TABAN IŞIĞI efektleri */
+        .hud-card::before {
+            content: ''; position: absolute; bottom: 0; left: 10%; width: 80%; height: 1px;
+            background: linear-gradient(to right, transparent, var(--cyber-blue), transparent);
+            box-shadow: 0 0 15px var(--cyber-blue); opacity: 0.7;
         }
 
-        /* GRID YAPISI */
-        .grid-layout {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;
+        .hud-card:hover {
+            transform: translateZ(40px) rotateX(-2deg);
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 50px 90px rgba(0,0,0,0.8), 0 0 40px rgba(0, 240, 255, 0.15);
         }
 
-        /* SLIDER & KONTROLLER */
-        .slider-box { margin-bottom: 15px; }
-        .slider-box label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px; }
-        .slider-box span { color: var(--cyber-blue); font-weight: bold; }
-        .cyber-input { width: 100%; accent-color: var(--cyber-blue); background: rgba(0,0,0,0.5); height: 4px; border-radius: 2px; outline: none; }
+        .hud-title {
+            font-family: 'Orbitron'; font-weight: 800; font-size: 1.1rem; color: #fff;
+            letter-spacing: 2px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 18px; margin-bottom: 25px;
+        }
 
-        /* MODAL (FULL SCREEN DETAIL) */
-        .cyber-modal {
+        .grid-system { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 30px; }
+
+        /* HIGH-END INTERACTIVE ELEMENTS */
+        .slider-group { margin-bottom: 20px; }
+        .slider-group label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px; }
+        .slider-group span { color: var(--cyber-blue); font-weight: 600; }
+        .range-slider { width: 100%; accent-color: var(--cyber-blue); background: rgba(0,0,0,0.6); height: 4px; border-radius: 2px; outline: none; cursor: pointer; }
+
+        /* REALISTIC PROJECTOR BASE GLOW */
+        .cyber-floor-glow {
+            position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 200px; background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.18) 0%, transparent 75%);
+            filter: blur(35px); pointer-events: none; z-index: 0;
+        }
+
+        /* CINEMATIC MODAL TERMINAL */
+        .quantum-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(1, 3, 9, 0.95); backdrop-filter: blur(30px);
+            background: rgba(1, 3, 8, 0.94); backdrop-filter: blur(25px);
             z-index: 20000; display: none; align-items: center; justify-content: center;
-            animation: fadeIn 0.4s ease;
         }
-        .modal-body {
-            width: 85%; max-width: 1000px; background: rgba(10, 18, 38, 0.8);
-            border: 1px solid var(--cyber-blue); border-radius: 24px; padding: 40px;
-            position: relative; box-shadow: 0 0 100px rgba(0,240,255,0.2);
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* HOLOGRAFİK ZEMİN YANSIMASI (GÖRSELDEKİ PROJEKSİYON TABANI) */
-        .projector-base {
-            position: fixed; bottom: -50px; left: 50%; transform: translateX(-50%);
-            width: 600px; height: 150px; background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
-            filter: blur(20px); z-index: 0; pointer-events: none;
+        .modal-mainframe {
+            width: 85%; max-width: 950px; background: rgba(3, 8, 24, 0.85);
+            border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 24px; padding: 45px;
+            position: relative; box-shadow: 0 0 80px rgba(0,240,255,0.25);
         }
 
-        /* SOSYAL BUTONLAR */
-        .btn-row { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-        .btn-cyber {
-            padding: 12px 25px; border: 1px solid var(--cyber-blue); background: transparent;
-            color: var(--cyber-blue); text-decoration: none; font-size: 0.8rem; font-weight: bold;
-            border-radius: 8px; transition: 0.3s;
+        .terminal-stream {
+            background: rgba(0,0,0,0.6); border-radius: 12px; padding: 20px;
+            font-size: 0.8rem; color: var(--cyber-neon); height: 180px; overflow-y: auto;
+            border-left: 3px solid var(--cyber-neon); margin-top: 25px; line-height: 1.6;
         }
-        .btn-cyber:hover { background: var(--cyber-blue); color: #000; box-shadow: 0 0 20px var(--cyber-blue); }
 
-        .telemetry-log {
-            background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;
-            font-size: 0.75rem; color: var(--cyber-neon); height: 150px; overflow-y: auto;
-            border-left: 2px solid var(--cyber-neon); margin-top: 20px;
+        .badge-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+        .cyber-badge { background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0,240,255,0.15); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; color: #cbd5e1; }
+
+        .btn-network {
+            padding: 12px 28px; border: 1px solid var(--cyber-blue); background: transparent;
+            color: var(--cyber-blue); font-family: 'Orbitron'; font-weight: bold; font-size: 0.75rem;
+            border-radius: 6px; text-decoration: none; transition: 0.3s; letter-spacing: 1px;
         }
+        .btn-network:hover { background: var(--cyber-blue); color: #000; box-shadow: 0 0 25px var(--cyber-blue); }
     </style>
 </head>
 <body>
 
     <div id="boot-screen">
-        <button class="boot-btn" onclick="initStation()">INITIALIZE NEURAL LINK</button>
+        <div class="boot-box">
+            <div style="font-family: 'Orbitron'; font-weight: 900; color: #fff; font-size: 1.4rem; letter-spacing: 1px;">⚡ SECURE ACCESS REQUIRED</div>
+            <p style="color: #64748b; font-size: 0.85rem; margin-top: 10px; line-height: 1.6;">Click beneath to initiate quantum handshake audio synchronization and load isometric neural grid mapping models.</p>
+            <button class="boot-btn" onclick="initializeSystem()">CONNECT STATION</button>
+        </div>
     </div>
 
-    <div class="projector-base"></div>
-
+    <div class="cyber-floor-glow"></div>
     <canvas id="cyber-canvas"></canvas>
 
-    <div class="station-wrapper notranslate">
+    <div class="station-container notranslate">
         
-        <div class="holo-panel" onclick="showDetail('Core Identity', 'Neural synchronization successful. System admin: Asena. Accessing multi-dimensional data engineering nodes.')">
-            <div class="panel-title">
-                <span>SYSTEM OPERATOR</span>
-                <span style="color: var(--cyber-neon); font-size: 0.7rem;">● ONLINE</span>
+        <div class="hud-card" onclick="openTerminalNode('System Mainframe Architecture', 'Neural sync established with core clusters. Memory array indexes fully functioning across remote feature store modules. Deploying deep analytic forecasting trees.')">
+            <div class="hud-title">
+                <span>SYSTEM MASTER NODE</span>
+                <span style="color: var(--cyber-neon); font-size: 0.75rem; animation: pulse 1.5s infinite alternate;">● CORE ONLINE</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 30px;">
-                <img src="https://github.com/hellocypriotnomadassistant-oss.png" style="width: 110px; border-radius: 50%; border: 2px solid var(--cyber-blue); box-shadow: 0 0 20px rgba(0,240,255,0.3);">
+            <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+                <img src="https://github.com/hellocypriotnomadassistant-oss.png" style="width: 115px; height: 115px; border-radius: 50%; border: 2px solid var(--cyber-blue); box-shadow: 0 0 25px rgba(0,240,255,0.35); object-fit: cover;">
                 <div>
-                    <h1 style="margin: 0; font-size: 2.2rem;">Asena Beshiktepeli</h1>
-                    <p style="color: var(--cyber-purple); margin: 5px 0; letter-spacing: 2px;">AI & DATA ENGINEER</p>
-                    <div class="btn-row" style="justify-content: flex-start; margin-top: 15px;">
-                        <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="btn-cyber">LINKEDIN</a>
-                        <a href="https://www.kaggle.com/anesaa" target="_blank" class="btn-cyber" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">KAGGLE</a>
+                    <h1 style="margin: 0; font-family: 'Orbitron'; font-weight: 900; font-size: 2.4rem; letter-spacing: 1px; color: #fff;">Asena Beshiktepeli</h1>
+                    <p style="color: var(--cyber-purple); font-weight: 600; margin: 6px 0; letter-spacing: 3px; font-size: 0.95rem;">AI & DATA ENGINEER</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="btn-network">LINKEDIN PROFILE</a>
+                        <a href="https://www.kaggle.com/anesaa" target="_blank" class="btn-network" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">KAGGLE WORKSPACE</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="grid-layout">
-            <div class="holo-panel" onclick="showDetail('Waze Churn Engine', 'Processing historical device telemetry. Gradient Boosting algorithm evaluates churn probability based on spatial distance and engagement metrics.')">
-                <div class="panel-title"><span>WAZE ANALYTICS</span> <small style="color: var(--cyber-blue)">GBM NODE</small></div>
-                <div class="slider-box" onclick="event.stopPropagation()">
-                    <label>Driving Distance: <span id="km-val">3500 km</span></label>
-                    <input type="range" min="500" max="8000" value="3500" class="cyber-input" id="km-input">
+        <div class="grid-system">
+            <div class="hud-card" onclick="openTerminalNode('Waze Telemetry Cluster', 'Processing dynamic geometric driver records. Executing serialized loss matrices inside the Gradient Boosting framework to calculate customer risk indexes.')">
+                <div class="hud-title"><span>WAZE LOGISTICS</span> <small style="color: var(--cyber-blue); font-size: 0.75rem;">GBM LAYER</small></div>
+                <div class="slider-group" onclick="event.stopPropagation()">
+                    <label>Monthly Commute: <span id="km-lbl">3500 km</span></label>
+                    <input type="range" min="500" max="8000" value="3500" class="range-slider" id="km-sl">
                 </div>
-                <div class="slider-box" onclick="event.stopPropagation()">
-                    <label>Sessions: <span id="s-val">25</span></label>
-                    <input type="range" min="1" max="100" value="25" class="cyber-input" id="s-input">
+                <div class="slider-group" onclick="event.stopPropagation()">
+                    <label>Active App Sessions: <span id="s-lbl">25</span></label>
+                    <input type="range" min="1" max="100" value="25" class="range-slider" id="s-sl">
                 </div>
-                <div id="waze-status" style="color: var(--cyber-neon); font-size: 0.8rem; font-weight: bold; margin-top: 10px;">ANALYZING...</div>
+                <div id="waze-telemetry" style="color: var(--cyber-neon); font-size: 0.85rem; font-weight: bold; margin-top: 15px;">INITIALIZING TELEMETRY...</div>
             </div>
 
-            <div class="holo-panel" onclick="showDetail('TikTok Audit Hub', 'Random Forest architecture scanning unstructured media arrays. Generating integrity scores for automated content moderation.')">
-                <div class="panel-title"><span>TIKTOK AUDIT</span> <small style="color: var(--cyber-orange)">RF NODE</small></div>
-                <div class="slider-box" onclick="event.stopPropagation()">
-                    <label>Video Views: <span id="v-val">45,000</span></label>
-                    <input type="range" min="1000" max="500000" value="45000" class="cyber-input" id="v-input" style="accent-color: var(--cyber-orange);">
+            <div class="hud-card" onclick="openTerminalNode('TikTok Safety Sub-Node', 'Evaluating real-time reporting matrices. Non-linear decision layers compute automated moderation thresholds for content integrity assessment.')">
+                <div class="hud-title"><span>TIKTOK AUDIT</span> <small style="color: var(--cyber-orange); font-size: 0.75rem;">RANDOM FOREST</small></div>
+                <div class="slider-group" onclick="event.stopPropagation()">
+                    <label>Content Views: <span id="v-lbl">45,000</span></label>
+                    <input type="range" min="1000" max="500000" value="45000" class="range-slider" id="v-sl" style="accent-color: var(--cyber-orange);">
                 </div>
-                <div class="slider-box" onclick="event.stopPropagation()">
-                    <label>Report Count: <span id="r-val">12</span></label>
-                    <input type="range" min="0" max="100" value="12" class="cyber-input" id="r-input" style="accent-color: var(--cyber-orange);">
+                <div class="slider-group" onclick="event.stopPropagation()">
+                    <label>Incident Reports: <span id="r-lbl">12</span></label>
+                    <input type="range" min="0" max="100" value="12" class="range-slider" id="r-sl" style="accent-color: var(--cyber-orange);">
                 </div>
-                <div id="tiktok-status" style="color: var(--cyber-orange); font-size: 0.8rem; font-weight: bold; margin-top: 10px;">SCANNING...</div>
+                <div id="tiktok-telemetry" style="color: var(--cyber-orange); font-size: 0.85rem; font-weight: bold; margin-top: 15px;">SCANNING DATASTREAMS...</div>
             </div>
 
-            <div class="holo-panel" onclick="showDetail('Tech Stack Node', 'Compiling production-ready code modules. Optimized for high-velocity data pipelines and distributed cloud environments.')">
-                <div class="panel-title"><span>TECH MATRIX</span></div>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <span style="background: rgba(0,0,0,0.4); border: 1px solid var(--cyber-blue); padding: 5px 12px; border-radius: 5px; font-size: 0.7rem;">Python (OOP)</span>
-                    <span style="background: rgba(0,0,0,0.4); border: 1px solid var(--cyber-orange); padding: 5px 12px; border-radius: 5px; font-size: 0.7rem;">SQL Master</span>
-                    <span style="background: rgba(0,0,0,0.4); border: 1px solid var(--cyber-purple); padding: 5px 12px; border-radius: 5px; font-size: 0.7rem;">Scikit-Learn</span>
+            <div class="hud-card" onclick="openTerminalNode('Core Matrix Capabilities', 'System libraries verified. Analytical pipelines streaming optimally at full cluster speed.')">
+                <div class="hud-title"><span>NEURAL CAPABILITIES</span></div>
+                <div class="badge-grid">
+                    <span class="cyber-badge" style="border-color: var(--cyber-blue); color: var(--cyber-blue);">Python (Advanced OOP)</span>
+                    <span class="cyber-badge" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">SQL Mainframe Grid</span>
+                    <span class="cyber-badge" style="border-color: var(--cyber-purple); color: var(--cyber-purple);">Scikit-Learn Nodes</span>
                 </div>
-                <div style="height: 150px; margin-top: 20px;">
-                    <canvas id="radarChart"></canvas>
+                <div style="height: 160px; margin-top: 25px;">
+                    <canvas id="radarChartNode"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="detailModal" class="cyber-modal">
-        <div class="modal-body">
-            <span style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: var(--cyber-blue); cursor: pointer;" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle" style="font-family: 'Orbitron'; color: #fff;">SYSTEM ACCESS</h2>
-            <p id="modalDesc" style="color: #94a3b8; line-height: 1.6;"></p>
-            <div class="telemetry-log" id="logStream"></div>
+    <div id="quantumModal" class="quantum-modal">
+        <div class="modal-mainframe">
+            <span style="position: absolute; top: 25px; right: 35px; font-size: 2.2rem; color: var(--cyber-blue); cursor: pointer; transition: 0.2s;" onclick="closeTerminalNode()">&times;</span>
+            <h2 id="mTitle" style="font-family: 'Orbitron'; font-weight: 800; color: #fff; margin: 0; letter-spacing: 1px;">MAINBOARD SUB-SYSTEM</h2>
+            <p id="mDesc" style="color: #cbd5e1; line-height: 1.7; margin-top: 15px; font-size: 0.95rem;"></p>
+            <div class="terminal-stream" id="logStream"></div>
         </div>
     </div>
 
     <script>
+        // CINEMATIC SCI-FI AUDIO ENGINE (WEB AUDIO SYNTHESIZER)
         let audioCtx = null;
-        function playSound(f, d, t='sine') {
+
+        function playPremiumSciFiSound(frequency, duration, type='sine', volume=0.2, sweep=0) {
             try {
-                if(!audioCtx) audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-                if(audioCtx.state === 'suspended') audioCtx.resume();
-                let o = audioCtx.createOscillator(), g = audioCtx.createGain();
-                o.type = t; o.frequency.setValueAtTime(f, audioCtx.currentTime);
-                g.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + d);
-                o.connect(g); g.connect(audioCtx.destination);
-                o.start(); o.stop(audioCtx.currentTime + d);
-            } catch(e){}
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                let osc = audioCtx.createOscillator();
+                let gainNode = audioCtx.createGain();
+                
+                osc.type = type;
+                osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+                
+                // Frekans Kayması (Sweep) Efekti - Sesi mekaniklikten kurtarır, zenginleştirir
+                if (sweep !== 0) {
+                    osc.frequency.exponentialRampToValueAtTime(frequency + sweep, audioCtx.currentTime + duration);
+                }
+
+                gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
         }
 
-        function initStation() {
-            playSound(100, 1, 'sawtooth');
-            setTimeout(() => playSound(500, 0.5), 200);
+        // INITIAL BOOT: CINEMATIC BASS DROP AND SYSTEM CHIRP
+        function initializeSystem() {
+            // Derin fütüristik alt bas patlaması (Sub-bass drop)
+            playPremiumSciFiSound(70, 1.5, 'sawtooth', 0.25, -30);
+            setTimeout(() => playPremiumSciFiSound(180, 0.6, 'sine', 0.3, 100), 200);
+            setTimeout(() => playPremiumSciFiSound(520, 0.3, 'triangle', 0.2), 500);
+            setTimeout(() => playPremiumSciFiSound(960, 0.15, 'sine', 0.4), 700);
+
             document.getElementById('boot-screen').classList.add('hide');
         }
 
-        function showDetail(title, desc) {
-            playSound(600, 0.2);
-            document.getElementById('modalTitle').innerText = "// " + title.toUpperCase();
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('detailModal').style.display = 'flex';
-            
-            const log = document.getElementById('logStream');
-            log.innerHTML = '';
-            let lines = ["Loading modules...", "Establishing neural handshake...", "Data packets synchronized.", "Accessing core telemetry..."];
-            lines.forEach((l, i) => {
+        // DYNAMIC HUD CLICK & INTERACTION LOGIC
+        function openTerminalNode(title, description) {
+            // Klasik bip yerine iki aşamalı şık veri onay tınısı
+            playPremiumSciFiSound(440, 0.2, 'sine', 0.2, 200);
+            setTimeout(() => playPremiumSciFiSound(880, 0.15, 'sine', 0.3), 80);
+
+            document.getElementById('mTitle').innerText = `// ${title.toUpperCase()}`;
+            document.getElementById('mDesc').innerText = description;
+            document.getElementById('quantumModal').style.display = 'flex';
+
+            const stream = document.getElementById('logStream');
+            stream.innerHTML = '';
+            let pseudoLogs = [
+                "Deploying neural pipeline handshake protocol...",
+                "Retrieving distributed metadata weights from system arrays...",
+                "Checking cluster optimization addresses [OK]",
+                "Streaming encrypted multi-threaded data logs safely to UI layer..."
+            ];
+
+            pseudoLogs.forEach((line, index) => {
                 setTimeout(() => {
-                    log.innerHTML += "> " + l + "<br>";
-                    playSound(800 + (i*100), 0.05);
-                }, i * 200);
+                    stream.innerHTML += `>> ${line}<br>`;
+                    stream.scrollTop = stream.scrollHeight;
+                    // Veriler ekrana akarken çıkan mikro işlemci ses efektleri
+                    playPremiumSciFiSound(750 + (index * 80), 0.03, 'sine', 0.15);
+                }, index * 180);
             });
         }
 
-        function closeModal() {
-            playSound(200, 0.2);
-            document.getElementById('detailModal').style.display = 'none';
+        function closeTerminalNode() {
+            playPremiumSciFiSound(300, 0.2, 'sine', 0.2, -100);
+            document.getElementById('quantumModal').style.display = 'none';
         }
 
-        // ARKA PLAN PARÇACIK MOTORU
+        // AMBIENT BACKGROUND MATRIX LINE MOTOR
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
+        let lines = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
-        class Particle {
+        class MatrixLine {
             constructor() {
                 this.x = Math.random() * canvas.width;
-                this.y = canvas.height + 10;
-                this.speed = Math.random() * 2 + 0.5;
-                this.len = Math.random() * 50 + 10;
-                this.op = Math.random() * 0.3;
+                this.y = canvas.height + Math.random() * 80;
+                this.speed = Math.random() * 1.6 + 0.4;
+                this.length = Math.random() * 80 + 20;
+                this.opacity = Math.random() * 0.15 + 0.02;
             }
             update() {
                 this.y -= this.speed;
-                if(this.y < -50) this.y = canvas.height + 50;
+                if (this.y < -this.length) { this.y = canvas.height + this.length; this.x = Math.random() * canvas.width; }
             }
             draw() {
-                ctx.strokeStyle = `rgba(0, 240, 255, ${this.op})`;
+                ctx.strokeStyle = `rgba(0, 240, 255, ${this.opacity})`;
                 ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y - this.len); ctx.stroke();
+                ctx.lineTo(this.x, this.y - this.length); ctx.stroke();
             }
         }
-        for(let i=0; i<50; i++) particles.push(new Particle());
-        function anim() {
-            ctx.fillStyle = 'rgba(2, 4, 10, 0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(anim);
+        for(let i=0; i<40; i++) lines.push(new MatrixLine());
+        function runMatrix() {
+            ctx.fillStyle = 'rgba(1, 4, 10, 0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            lines.forEach(l => { l.update(); l.draw(); });
+            requestAnimationFrame(runMatrix);
         }
-        anim();
+        runMatrix();
 
-        // SIMULATORS LOGIC
-        const kmI = document.getElementById('km-input'), sI = document.getElementById('s-input');
-        const vI = document.getElementById('v-input'), rI = document.getElementById('r-input');
+        // MATH INFERENCE CONTROLLERS
+        const kmS = document.getElementById('km-sl'), sS = document.getElementById('s-sl');
+        const vS = document.getElementById('v-sl'), rS = document.getElementById('r-sl');
 
-        function updateWaze() {
-            const v = parseInt(kmI.value); const s = parseInt(sI.value);
-            document.getElementById('km-val').innerText = v + " km"; document.getElementById('s-val').innerText = s;
-            let score = Math.round((v/8000)*60 + (100-s)*0.4);
-            document.getElementById('waze-status').innerText = score > 60 ? "⚠️ CRITICAL CHURN: " + score + "%" : "✅ STABLE: " + score + "%";
+        function calcWaze() {
+            const km = parseInt(kmS.value); const s = parseInt(sS.value);
+            document.getElementById('km-lbl').innerText = km + " km"; document.getElementById('s-lbl').innerText = s;
+            let score = Math.round((km/8000)*55 + (100-s)*0.45);
+            document.getElementById('waze-telemetry').innerText = score > 60 ? `⚠️ CRITICAL CHURN VECTOR: ${score}%` : `✅ STABLE PIPELINE QUOTIENT: ${score}%`;
         }
-        function updateTikTok() {
-            const v = parseInt(vI.value); const r = parseInt(rI.value);
-            document.getElementById('v-val').innerText = v.toLocaleString(); document.getElementById('r-val').innerText = r;
+        function calcTikTok() {
+            const v = parseInt(vS.value); const r = parseInt(rS.value);
+            document.getElementById('v-lbl').innerText = v.toLocaleString(); document.getElementById('r-lbl').innerText = r;
             let score = Math.round((r*0.8) + (v/500000)*20);
-            document.getElementById('tiktok-status').innerText = score > 50 ? "🚨 ALERT: RISK " + score + "%" : "🟢 CLEAN: RISK " + score + "%";
+            document.getElementById('tiktok-telemetry').innerText = score > 55 ? `🚨 DETECTED ANOMALY RISK: ${score}%` : `🟢 COMPLIANT MATRIX SAFE: ${score}%`;
         }
-        kmI.oninput = () => { updateWaze(); playSound(400, 0.01); };
-        sI.oninput = () => { updateWaze(); playSound(420, 0.01); };
-        vI.oninput = () => { updateTikTok(); playSound(440, 0.01); };
-        rI.oninput = () => { updateTikTok(); playSound(460, 0.01); };
-        updateWaze(); updateTikTok();
 
-        // RADAR CHART
-        const rCtx = document.getElementById('radarChart').getContext('2d');
-        new Chart(rCtx, {
-            type: 'radar',
-            data: {
-                labels: ['ML', 'Data Eng', 'SQL', 'Python', 'Stats'],
-                datasets: [{
-                    label: 'Capability',
-                    data: [90, 85, 95, 88, 82],
-                    borderColor: '#00f0ff', backgroundColor: 'rgba(0, 240, 255, 0.1)',
-                    pointBackgroundColor: '#bd00ff'
-                }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                scales: { r: { grid: { color: 'rgba(255,255,255,0.05)' }, angleLines: { color: 'rgba(255,255,255,0.05)' }, pointLabels: { color: '#94a3b8' }, ticks: { display: false } } },
-                plugins: { legend: { display: false } }
-            }
+        // Slider kaydırılırken çalacak yumuşak, lüks dijital tıkırtı efektleri
+        kmS.oninput = () => { calcWaze(); playPremiumSciFiSound(600, 0.01, 'sine', 0.1); };
+        sS.oninput = () => { calcWaze(); playPremiumSciFiSound(620, 0.01, 'sine', 0.1); };
+        vS.oninput = () => { calcTikTok(); playPremiumSciFiSound(640, 0.01, 'sine', 0.1); };
+        rS.oninput = () => { calcTikTok(); playPremiumSciFiSound(660, 0.01, 'sine', 0.1); };
+        calcWaze(); calcTikTok();
+
+        // HIGH-END DATA RADAR GRID
+        document.addEventListener("DOMContentLoaded", function() {
+            const rCtx = document.getElementById('radarChartNode').getContext('2d');
+            new Chart(rCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['ML Architecture', 'Data Optimization', 'SQL Engines', 'Python OOP', 'Statistical Analysis'],
+                    datasets: [{
+                        data: [92, 86, 95, 89, 84],
+                        borderColor: '#00f0ff', backgroundColor: 'rgba(0, 240, 255, 0.02)',
+                        pointBackgroundColor: '#bd00ff', borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { r: { grid: { color: 'rgba(255,255,255,0.04)' }, angleLines: { color: 'rgba(255,255,255,0.04)' }, pointLabels: { color: '#94a3b8', font: { family: 'Fira Code', size: 9 } }, ticks: { display: false } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
         });
     </script>
 
