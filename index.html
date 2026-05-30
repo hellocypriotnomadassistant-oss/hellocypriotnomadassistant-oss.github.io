@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asena Beshiktepeli | Data Science Portfolio</title>
     <style>
-        /* Siber Kokpit Tema Ayarları */
+        /* Gelişmiş Arka Plan ve Cam Efekti Ayarları */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #060913; /* Derin Uzay Mavisi */
+            /* Arka plan görseli - Klasöründeki arkaplan.jpg ile eşleşir */
+            background: linear-gradient(rgba(6, 9, 19, 0.85), rgba(6, 9, 19, 0.85)), 
+                        url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2070') no-repeat center center fixed;
+            background-size: cover;
             color: #d1d5db;
             line-height: 1.6;
             margin: 0;
@@ -17,24 +20,78 @@
         .container {
             max-width: 800px;
             margin: 50px auto;
-            padding: 20px;
+            padding: 25px;
         }
-        /* Başlıklar ve Kokpit Göstergeleri */
+
+        /* Profil Fotoğrafı ve Başlık Alanı */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00f0ff;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            margin-bottom: 15px;
+        }
         h1 {
-            color: #00f0ff; /* Siber Mavi */
+            color: #00f0ff;
             font-size: 2.7rem;
-            margin-bottom: 5px;
+            margin: 10px 0 5px 0;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
         .subtitle {
-            color: #39ff14; /* Neon Yeşil */
+            color: #39ff14;
             font-size: 1.2rem;
             font-weight: 600;
             margin-top: 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
+        /* Cam Efektli (Glassmorphism) Modern Kartlar */
+        .dashboard-panel, .project-card {
+            background-color: rgba(11, 19, 43, 0.75); /* Hafif şeffaf arka plan */
+            backdrop-filter: blur(10px); /* Arka planı bulandırma (Cam Efekti) */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #00f0ff;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Göstergeler (Progress Bars) */
+        .metric-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #39ff14;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .progress-bar-bg {
+            background-color: rgba(28, 37, 65, 0.6);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #00f0ff, #39ff14);
+            height: 100%;
+            border-radius: 4px;
+        }
+
         p {
             font-size: 1.1rem;
             color: #9ca3af;
@@ -47,69 +104,19 @@
         }
         h2 {
             color: #00f0ff;
-            border-bottom: 1px solid #1f2937;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 10px;
             margin-top: 40px;
-        }
-
-        /* Uçuş Göstergeleri (Progress Bars) */
-        .dashboard-panel {
-            background-color: #0b132b;
-            border: 1px solid #1c2541;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .metric-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #39ff14;
-            margin-bottom: 5px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .progress-bar-bg {
-            background-color: #1c2541;
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            background: linear-gradient(90deg, #00f0ff, #39ff14);
-            height: 100%;
-            border-radius: 4px;
-        }
-
-        /* İvme Efektli Proje Kartları (Kalkış Hissiyatı) */
-        .project-card {
-            background-color: #0b132b;
-            border: 1px solid #1c2541;
-            border-radius: 8px;
-            padding: 24px;
-            margin-top: 20px;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        /* Fareyle üzerine gelindiğinde kalkış ve parlama efekti */
-        .project-card:hover {
-            transform: translateY(-5px); /* İvmelenme/Kalkış */
-            border-color: #00f0ff;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
         }
         .project-card strong {
             color: #ff7b72;
             font-size: 1.3rem;
         }
-        .project-card p {
-            font-size: 1rem;
-            color: #9ca3af;
-            margin: 10px 0 20px 0;
-        }
 
         /* Şık Siber Buton */
         .btn {
             display: inline-block;
-            background-color: #1f2937;
+            background-color: rgba(31, 41, 55, 0.8);
             color: #00f0ff;
             padding: 10px 20px;
             font-size: 0.9rem;
@@ -129,10 +136,12 @@
 <body>
 
     <div class="container">
-        <h1>Hello, I'm Asena</h1>
-        <p class="subtitle">🛰️ Data Analyst & AI Systems Explorer</p>
-        
-        <p>Welcome to my digital flight deck. I deploy data pipelines, build analytical models, and document my advanced machine learning journey right here.</p>
+        <div class="profile-section">
+            <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena Beshiktepeli" class="profile-img">
+            <h1>Hello, I'm Asena</h1>
+            <p class="subtitle">🛰️ Data Analyst & AI Systems Explorer</p>
+            <p>Welcome to my digital flight deck. I deploy data pipelines, build analytical models, and document my advanced machine learning journey right here.</p>
+        </div>
         
         <h2>🛸 Core Systems Status</h2>
         <div class="dashboard-panel">
