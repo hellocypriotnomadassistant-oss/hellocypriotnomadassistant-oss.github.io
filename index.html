@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asena Beshiktepeli | Data Scientist Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700;900&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
@@ -180,16 +181,9 @@
             </div>
         </div>
         
-        <h2>⚡ Core Architecture Status</h2>
-        <div class="dashboard-panel">
-            <div class="metric-title"><span>Advanced Algorithm Implementations</span><span>90%</span></div>
-            <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
-            
-            <div class="metric-title"><span>Predictive Modeling & Inference Optimization</span><span>75%</span></div>
-            <div class="progress-bar-bg"><div class="progress-fill" style="width: 75%;"></div></div>
-            
-            <div class="metric-title"><span>Data Engineering & Telemetry Pipelines</span><span>80%</span></div>
-            <div class="progress-bar-bg"><div class="progress-fill" style="width: 80%;"></div></div>
+        <h2>📊 Core Architecture Telemetry</h2>
+        <div class="dashboard-panel" style="position: relative; height:320px; width:100%; display: flex; justify-content: center;">
+            <canvas id="architectureChart"></canvas>
         </div>
 
         <hr>
@@ -346,21 +340,58 @@
         
         updateWazePrediction();
         updateTikTokPrediction();
-    </script>
-<script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '6a1b26696b0f6697163e7922' },
-          url: 'https://general-runtime.voiceflow.com',
-          voice: {
-            url: "https://runtime-api.voiceflow.com"
-          }
+
+        // 3. Radar Grafik Çizim Motoru
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('architectureChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Advanced Algorithms', 'Model Optimization', 'Data Engineering', 'Predictive Inference', 'Statistical Analysis'],
+                    datasets: [{
+                        label: 'System Competency Level (%)',
+                        data: [90, 75, 80, 85, 88],
+                        backgroundColor: 'rgba(0, 240, 255, 0.15)',
+                        borderColor: '#00f0ff',
+                        pointBackgroundColor: '#39ff14',
+                        pointBorderColor: '#060913',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            grid: { color: 'rgba(0, 240, 255, 0.1)' },
+                            angleLines: { color: 'rgba(0, 240, 255, 0.2)' },
+                            pointLabels: { color: '#d1d5db', font: { family: 'Fira Code', size: 10 } },
+                            ticks: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#39ff14', font: { family: 'Orbitron', size: 11 } } }
+                    }
+                }
+            });
         });
-      }
-      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
-    </body>
+    </script>
+
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectId: '61b26696b0f6697163e79222' },
+              url: 'https://general-runtime.voiceflow.com',
+              version: { className: 'production' }
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
+
+</body>
 </html>
