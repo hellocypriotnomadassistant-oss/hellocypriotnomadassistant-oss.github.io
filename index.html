@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
-    <title>Asena Beshiktepeli | Data Scientist Portfolio</title>
+    <title>Asena Beshiktepeli | AI & Data Engineering Station</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700;900&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        @keyframes fadeInScene { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulseGlow { 0%, 100% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 12px 4px rgba(57, 255, 20, 0.5); } }
+        :root {
+            --cyber-orange: #ff9f00;
+            --cyber-blue: #00f0ff;
+            --cyber-neon: #39ff14;
+            --bg-dark: #060913;
+        }
 
-        /* SİBER PARÇACIKLAR İÇİN ARKA PLAN KATMANI */
+        /* CANLI SİBER ARKA PLAN */
         #cyber-canvas {
             position: fixed;
             top: 0;
@@ -22,98 +26,186 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: #02040a;
+            background: radial-gradient(circle at 50% 50%, #0c1328 0%, var(--bg-dark) 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Fira Code', monospace;
             color: #e2e8f0;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
             user-select: none;
-            animation: fadeInScene 1s ease-out forwards;
+            overflow-x: hidden;
+            background-color: var(--bg-dark);
         }
 
-        .container { max-width: 1050px; margin: 40px auto; padding: 20px; position: relative; z-index: 1; }
-        
-        /* ÖN KISIMDAKİ EN PARLAK GLASSMORPHISM ALANLAR */
-        .profile-section { 
-            text-align: center; 
-            margin-bottom: 30px; 
-            background: linear-gradient(135deg, rgba(10, 15, 30, 0.7), rgba(20, 30, 55, 0.5));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            border-top: 1px solid rgba(0, 240, 255, 0.4);
-            padding: 40px 30px;
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ÜST PROFİL ALANI - HOLOGRAM EKRANI */
+        .profile-card {
+            background: linear-gradient(135deg, rgba(255, 159, 0, 0.07), rgba(0, 240, 255, 0.03));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 159, 0, 0.2);
+            border-top: 2px solid var(--cyber-orange);
             border-radius: 24px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            cursor: pointer;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 159, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .status-indicator {
-            display: inline-flex; align-items: center; gap: 8px; background: rgba(2, 4, 10, 0.8);
-            border: 1px solid rgba(57, 255, 20, 0.4); padding: 6px 14px; border-radius: 20px;
-            font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #39ff14; margin-bottom: 25px; letter-spacing: 1px;
+
+        .profile-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,159,0,0.1), transparent);
+            animation: scanline 6s infinite linear;
         }
-        .status-dot { width: 8px; height: 8px; background-color: #39ff14; border-radius: 50%; animation: pulseGlow 2s infinite ease-in-out; }
+        @keyframes scanline { 0% { left: -100%; } 100% { left: 200%; } }
 
         .profile-img {
-            width: 120px; height: 120px; border-radius: 50%; border: 2px solid rgba(0, 240, 255, 0.6);
-            object-fit: cover; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;
+            width: 130px; height: 130px; border-radius: 50%;
+            border: 3px solid var(--cyber-orange);
+            box-shadow: 0 0 30px rgba(255, 159, 0, 0.4);
+            object-fit: cover; margin-bottom: 20px;
         }
-        
-        h1 { font-family: 'Orbitron', sans-serif; font-weight: 900; color: #ffffff; font-size: 3rem; margin: 10px 0 5px 0; letter-spacing: -1px; text-shadow: 0 0 20px rgba(0, 240, 255, 0.2); }
-        .subtitle { font-family: 'Fira Code', monospace; color: #00f0ff; font-size: 1.05rem; font-weight: 600; margin-top: 0; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-        h2 { font-family: 'Orbitron', sans-serif; color: #ffffff; font-size: 1.4rem; letter-spacing: 0.5px; margin-top: 50px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        h2::before { content: '//'; color: #00f0ff; font-family: 'Fira Code', monospace; font-weight: bold; }
 
-        .social-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-        .social-btn { font-family: 'Fira Code', monospace; background-color: rgba(10, 15, 30, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); color: #cbd5e1; padding: 10px 22px; font-size: 0.8rem; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(10px); }
-        .social-btn:hover { border-color: #00f0ff; color: #00f0ff; background-color: rgba(0, 240, 255, 0.05); box-shadow: 0 0 20px rgba(0, 240, 255, 0.25); transform: translateY(-2px); }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2.8rem;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 159, 0, 0.3);
+        }
 
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .skills-card { background: rgba(10, 15, 30, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 24px; transition: all 0.3s ease; cursor: pointer; }
-        .skills-card:hover { border-color: rgba(57, 255, 20, 0.4); background: rgba(15, 23, 42, 0.6); box-shadow: 0 0 20px rgba(57, 255, 20, 0.1); }
-        .skills-card h3 { font-family: 'Orbitron', sans-serif; color: #39ff14; margin-top: 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .subtitle {
+            color: var(--cyber-blue);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
 
-        .tech-badge-container { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
-        .tech-badge { font-family: 'Fira Code', monospace; background-color: rgba(2, 4, 10, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); color: #cbd5e1; font-size: 0.7rem; font-weight: 500; padding: 4px 10px; border-radius: 6px; }
+        /* 2'Lİ PANEL GRID */
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
 
-        .dashboard-panel, .project-card, .ai-simulator-card { 
-            background: linear-gradient(145deg, rgba(10, 15, 30, 0.6), rgba(20, 30, 55, 0.4));
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 240, 255, 0.1); 
-            border-radius: 18px; 
-            padding: 28px; 
-            margin-top: 20px; 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        /* SİBER KARTLAR */
+        .cyber-panel {
+            background: rgba(10, 16, 32, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-left: 4px solid var(--cyber-blue);
+            border-radius: 16px;
+            padding: 25px;
             cursor: pointer;
-        }
-        .project-card:hover, .ai-simulator-card:hover { 
-            transform: translateY(-4px); 
-            border-color: rgba(0, 240, 255, 0.4); 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 240, 255, 0.1); 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
         }
 
-        .project-details { margin-top: 16px; font-size: 0.9rem; color: #94a3b8; border-left: 2px solid #39ff14; padding-left: 12px; }
-        .project-details span { color: #39ff14; font-weight: 600; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
+        .cyber-panel:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: var(--cyber-orange);
+            border-left-color: var(--cyber-orange);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(255, 159, 0, 0.15);
+        }
 
-        hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), rgba(57, 255, 20, 0.3), transparent); margin: 50px 0; }
-        .project-card strong, .ai-simulator-card strong { font-family: 'Orbitron', sans-serif; color: #ffffff; font-size: 1.25rem; letter-spacing: 0.5px; display: block; margin-bottom: 8px; }
-        
-        .btn { font-family: 'Fira Code', monospace; display: inline-block; background-color: rgba(2, 4, 10, 0.6); color: #00f0ff; padding: 9px 20px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(0, 240, 255, 0.4); border-radius: 8px; text-decoration: none; transition: all 0.2s ease; margin-top: 18px; }
-        .btn:hover { background-color: #00f0ff; color: #02040a; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+        .cyber-panel.orange-theme { border-left-color: var(--cyber-orange); }
+        .cyber-panel.orange-theme:hover { border-color: var(--cyber-blue); border-left-color: var(--cyber-blue); }
 
-        .sim-control { margin-bottom: 18px; }
-        .sim-control label { display: block; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px; }
-        .sim-control label span { color: #00f0ff; font-weight: bold; }
-        .sim-slider { width: 100%; accent-color: #00f0ff; background: rgba(2, 4, 10, 0.6); border-radius: 5px; height: 5px; outline: none; }
-        .sim-output-box { background: rgba(2, 4, 10, 0.7); border: 1px dashed rgba(57, 255, 20, 0.3); border-radius: 12px; padding: 18px; margin-top: 22px; text-align: center; font-family: 'Fira Code', monospace; }
-        .prediction-result { font-weight: bold; font-size: 1.1rem; letter-spacing: 0.5px; }
-        .simulators-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; }
+        .panel-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .panel-status {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--cyber-blue);
+            color: var(--cyber-blue);
+        }
+        .orange-theme .panel-status { border-color: var(--cyber-orange); color: var(--cyber-orange); }
+
+        /* SLIDERS */
+        .slider-container { margin: 15px 0; }
+        .slider-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; }
+        .slider-label span { color: #ffffff; }
+        .cyber-range { width: 100%; accent-color: var(--cyber-orange); background: rgba(0,0,0,0.5); height: 6px; border-radius: 3px; outline: none; }
+
+        /* BUTONLAR */
+        .social-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .cyber-btn {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--cyber-blue);
+            color: var(--cyber-blue);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .cyber-btn:hover {
+            background: var(--cyber-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--cyber-blue);
+            transform: translateY(-2px);
+        }
+
+        /* TEKNOLOJİ MATRIX ETİKETLERİ */
+        .matrix-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .matrix-badge { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; color: #cbd5e1; }
+
+        /* TIKLANDIĞINDA AÇILAN DEVAASA BÜYÜK EKRAN MODAL SİSTEMİ */
+        .cyber-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(4, 7, 16, 0.95);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: scale(1.1);
+        }
+        .cyber-modal.active { opacity: 1; pointer-events: auto; transform: scale(1); }
+
+        .modal-content {
+            width: 85%; max-width: 900px; background: rgba(12, 20, 38, 0.8);
+            border: 2px solid var(--cyber-orange); box-shadow: 0 0 60px rgba(255, 159, 0, 0.3);
+            border-radius: 24px; padding: 40px; position: relative;
+            animation: modalGlow 4s infinite alternate;
+        }
+        @keyframes modalGlow { 0% { box-shadow: 0 0 40px rgba(255,159,0,0.2); } 100% { box-shadow: 0 0 60px rgba(0,240,255,0.3); } }
+
+        .close-modal {
+            position: absolute; top: 20px; right: 25px; font-size: 2rem; color: var(--cyber-orange);
+            cursor: pointer; transition: color 0.2s;
+        }
+        .close-modal:hover { color: #ffffff; }
+
+        .live-code-stream {
+            background: #020408; border-radius: 12px; padding: 20px;
+            font-size: 0.85rem; color: var(--cyber-neon); max-height: 250px;
+            overflow-y: auto; border: 1px dashed rgba(57, 255, 20, 0.3); margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -121,273 +213,266 @@
     <canvas id="cyber-canvas"></canvas>
 
     <div class="container notranslate">
-        <div class="profile-section" onclick="playInterfaceSound(600, 0.08)">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <span>SYSTEMS: ACTIVE</span>
-            </div>
+        
+        <div class="profile-card" onclick="openImmersiveModal('Asena Beshiktepeli Systems', 'Deep Learning & Analytics Node initialized. System status nominal. Real-time predictive engines syncing across worldwide datasets.')">
+            <div class="panel-status" style="width: fit-content; margin: 0 auto 15px auto; border-color: var(--cyber-neon); color: var(--cyber-neon);">CORE STATUS: ONLINE</div>
             <img src="https://github.com/hellocypriotnomadassistant-oss.png" alt="Asena Beshiktepeli" class="profile-img">
             <h1>Asena Beshiktepeli</h1>
-            <p class="subtitle">🛰️ Data Scientist & AI Engineer</p>
-            <p style="color: #94a3b8; max-width: 700px; margin: 0 auto;">Architecting end-to-end data pipelines, developing robust predictive models, and deploying production-grade analytical applications to drive business intelligence.</p>
+            <div class="subtitle">📡 Data Scientist & AI Engineer</div>
+            <p style="color: #94a3b8; max-width: 750px; margin: 0 auto; font-size: 0.9rem;">Architecting predictive infrastructure, training high-dimensional algorithms, and deploying visual intelligence environments.</p>
         </div>
 
-        <div class="social-container">
-            <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="social-btn" onclick="playInterfaceSound(800, 0.05)">🔗 Professional LinkedIn</a>
-            <a href="https://www.kaggle.com/anesaa" target="_blank" class="social-btn" onclick="playInterfaceSound(800, 0.05)">🛸 Kaggle Workspace</a>
-            <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="social-btn" onclick="playInterfaceSound(800, 0.05)">✉️ Secure Mail</a>
+        <div class="social-row">
+            <a href="https://www.linkedin.com/in/cypriotasena" target="_blank" class="cyber-btn">🔗 SECURE LINKEDIN</a>
+            <a href="https://www.kaggle.com/anesaa" target="_blank" class="cyber-btn" style="border-color: var(--cyber-orange); color: var(--cyber-orange);">🛸 KAGGLE WORKSPACE</a>
+            <a href="mailto:hello.cypriotnomadassistant@gmail.com" class="cyber-btn">✉️ ENCRYPTED MAIL</a>
         </div>
 
-        <h2>🤖 Live ML Inference Engines (Simulators)</h2>
-        <div class="simulators-grid">
-            <div class="ai-simulator-card" onclick="playInterfaceSound(500, 0.05)">
-                <strong>Waze User Churn Risk Calculator</strong>
-                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Simulates a Gradient Boosting classifier evaluating device telemetry for customer attrition analysis.</p>
-                <div class="sim-control">
-                    <label>Monthly Driving Kilometers: <span id="km-val">3500</span> km</label>
-                    <input type="range" min="500" max="8000" value="3500" class="sim-slider" id="km-slider" oninput="playInterfaceSound(400, 0.02)">
-                </div>
-                <div class="sim-control">
-                    <label>App Sessions This Month: <span id="sessions-val">25</span> sessions</label>
-                    <input type="range" min="1" max="100" value="25" class="sim-slider" id="sessions-slider" oninput="playInterfaceSound(420, 0.02)">
-                </div>
-                <div class="sim-output-box" id="waze-box">
-                    <span style="color: #64748b; font-size: 0.75rem;">INFERENCE MATRIX // STATUS:</span>
-                    <div id="waze-result" class="prediction-result" style="color: #39ff14; margin-top: 5px;">CALCULATING...</div>
-                </div>
-            </div>
-
-            <div class="ai-simulator-card" onclick="playInterfaceSound(500, 0.05)">
-                <strong>TikTok Content Claim Risk Audit</strong>
-                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Simulates a Random Forest pipeline auditing structured media variables to flag content risk violations.</p>
-                <div class="sim-control">
-                    <label>Video View Count: <span id="views-val">45000</span> views</label>
-                    <input type="range" min="1000" max="500000" value="45000" class="sim-slider" id="views-slider" oninput="playInterfaceSound(440, 0.02)">
-                </div>
-                <div class="sim-control">
-                    <label>User Report Rate: <span id="reports-val">12</span> reports</label>
-                    <input type="range" min="0" max="100" value="12" class="sim-slider" id="reports-slider" oninput="playInterfaceSound(460, 0.02)">
-                </div>
-                <div class="sim-output-box" id="tiktok-box">
-                    <span style="color: #64748b; font-size: 0.75rem;">AUDIT ENGINE // STATUS:</span>
-                    <div id="tiktok-result" class="prediction-result" style="color: #39ff14; margin-top: 5px;">PROCESSING...</div>
-                </div>
-            </div>
-        </div>
-
-        <h2>🛠️ Technical Competency Matrix</h2>
-        <div class="skills-grid">
-            <div class="skills-card" onclick="playInterfaceSound(700, 0.06)">
-                <h3>Languages & Core</h3>
-                <div class="tech-badge-container">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">SQL</span>
-                </div>
-            </div>
-            <div class="skills-card" onclick="playInterfaceSound(700, 0.06)">
-                <h3>Data Engineering</h3>
-                <div class="tech-badge-container">
-                    <span class="tech-badge">Pandas</span>
-                    <span class="tech-badge">Git Flow</span>
-                </div>
-            </div>
-            <div class="skills-card" onclick="playInterfaceSound(700, 0.06)">
-                <h3>Machine Learning</h3>
-                <div class="tech-badge-container">
-                    <span class="tech-badge">Scikit-Learn</span>
-                    <span class="tech-badge">Predictive Modeling</span>
-                </div>
-            </div>
-            <div class="skills-card" onclick="playInterfaceSound(700, 0.06)">
-                <h3>Business Intelligence</h3>
-                <div class="tech-badge-container">
-                    <span class="tech-badge">Tableau Analytics</span>
-                </div>
-            </div>
-        </div>
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;">// LIVE INFERENCE STATIONS</h2>
         
-        <h2>📊 Core Architecture Telemetry</h2>
-        <div class="dashboard-panel" style="position: relative; height:360px; width:100%; display: flex; justify-content: center; background: rgba(10, 15, 30, 0.5);">
-            <canvas id="architectureChart"></canvas>
-        </div>
-
-        <hr>
-        
-        <h2>⚡ Core Infrastructure</h2>
-        <div class="project-card" onclick="playInterfaceSound(550, 0.05)">
-            <strong>Data Science Engineering Hub</strong>
-            <p style="color: #94a3b8; font-size: 0.9rem;">A centralized repository compiling advanced modular Python object-oriented programming (OOP) modules, automation logic, and foundational computing scripts designed for analytical scalability.</p>
-            <div class="tech-badge-container">
-                <span class="tech-badge">Python Core</span>
-                <span class="tech-badge">Git Version Control</span>
+        <div class="cyber-grid">
+            <div class="cyber-panel" onclick="openImmersiveModal('Waze Churn Matrix Logic', 'Executing tree-based boosting classification. Evaluation triggers customer risk scoring over driving telemetry arrays. Deep analytical weights processing.')">
+                <div class="panel-header">
+                    <span>Waze Churn Risk</span>
+                    <span class="panel-status">GBM ENGINE</span>
+                </div>
+                <div class="slider-container" onclick="event.stopPropagation()">
+                    <div class="slider-label">Monthly Distance: <span id="km-lbl">3500 km</span></div>
+                    <input type="range" min="500" max="8000" value="3500" class="cyber-range" id="km-range">
+                </div>
+                <div class="slider-container" onclick="event.stopPropagation()">
+                    <div class="slider-label">Active App Sessions: <span id="sessions-lbl">25</span></div>
+                    <input type="range" min="1" max="100" value="25" class="cyber-range" id="sessions-range">
+                </div>
+                <div id="waze-telemetry" style="margin-top: 15px; color: var(--cyber-neon); font-size: 0.85rem; font-weight: bold;">STATUS: PROCESSING...</div>
             </div>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="btn" onclick="playInterfaceSound(900, 0.08)">Deploy Repository</a>
-        </div>
 
-        <div class="project-card" onclick="playInterfaceSound(550, 0.05)">
-            <strong>AI & Predictive Modeling Sandbox</strong>
-            <p style="color: #94a3b8; font-size: 0.9rem;">Advanced analytical testing ground dedicated to model evaluation, supervised learning algorithms, predictive telemetry, and scheduling autonomous algorithmic inference agents.</p>
-            <div class="tech-badge-container">
-                <span class="tech-badge">Machine Learning</span>
-                <span class="tech-badge">Statistical Inference</span>
+            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('TikTok Violation Safety Hub', 'Random Forest architecture processing text arrays and report weights. Real-time scanning flags malicious digital signatures automatically.')">
+                <div class="panel-header">
+                    <span>TikTok Content Audit</span>
+                    <span class="panel-status">RISK MATRICES</span>
+                </div>
+                <div class="slider-container" onclick="event.stopPropagation()">
+                    <div class="slider-label">Media Views: <span id="views-lbl">45,000</span></div>
+                    <input type="range" min="1000" max="500000" value="45000" class="cyber-range" id="views-range" style="accent-color: var(--cyber-blue);">
+                </div>
+                <div class="slider-container" onclick="event.stopPropagation()">
+                    <div class="slider-label">User Reports: <span id="reports-lbl">12</span></div>
+                    <input type="range" min="0" max="100" value="12" class="cyber-range" id="reports-range" style="accent-color: var(--cyber-blue);">
+                </div>
+                <div id="tiktok-telemetry" style="margin-top: 15px; color: var(--cyber-orange); font-size: 0.85rem; font-weight: bold;">STATUS: PROCESSING...</div>
             </div>
-            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="btn" onclick="playInterfaceSound(900, 0.08)">Scan AI Workspace</a>
         </div>
 
-        <h2>📊 Analytical Case Studies</h2>
-        
-        <div class="project-card" onclick="playInterfaceSound(550, 0.05)">
-            <strong>Waze User Retention & Churn Optimization</strong>
-            <p style="color: #94a3b8; font-size: 0.9rem;">Integrated advanced exploratory data analysis (EDA) with statistical modeling to optimize user lifecycle values by isolating key churn drivers within device telemetry logs.</p>
-            <div class="project-details"><span>EXECUTION //</span> Prevent customer loss by predicting telemetry-driven user exit behaviors.</div>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Waze_User_Churn_Project" target="_blank" class="btn" onclick="playInterfaceSound(900, 0.08)">Extract Metrics</a>
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;">// CORE TECHNICAL MATRIX</h2>
+        <div class="cyber-grid">
+            <div class="cyber-panel" onclick="openImmersiveModal('Languages Matrix Data', 'Executing low-level compilation pipelines. Production grade models utilize advanced matrix multiplication structures across distributed cores.')">
+                <div class="panel-header">Languages & Core</div>
+                <div class="matrix-badges">
+                    <span class="matrix-badge" style="border-color: var(--cyber-blue);">Python (OOP)</span>
+                    <span class="matrix-badge">Advanced SQL</span>
+                </div>
+            </div>
+            <div class="cyber-panel orange-theme" onclick="openImmersiveModal('Data Pipelines Stream', 'Deploying optimized scheduling algorithms. Automated telemetry orchestration pipelines structure messy logs into multi-dimensional databases.')">
+                <div class="panel-header">Data Engineering</div>
+                <div class="matrix-badges">
+                    <span class="matrix-badge" style="border-color: var(--cyber-orange);">Pandas & NumPy</span>
+                    <span class="matrix-badge">Git Workspace Architecture</span>
+                </div>
+            </div>
+            <div class="cyber-panel" onclick="openImmersiveModal('Supervised Learning Node', 'Initializing optimization parameters. Weights tune mathematical architectures to increase system accuracy over telemetry fields.')">
+                <div class="panel-header">Machine Learning</div>
+                <div class="matrix-badges">
+                    <span class="matrix-badge" style="border-color: var(--cyber-neon);">Scikit-Learn</span>
+                    <span class="matrix-badge">Predictive Automation</span>
+                </div>
+            </div>
         </div>
 
-        <div class="project-card" onclick="playInterfaceSound(550, 0.05)">
-            <strong>TikTok Media Data Transformation Pipeline</strong>
-            <p style="color: #94a3b8; font-size: 0.9rem;">Engineered an extensive data cleaning and restructuring pipeline capable of transforming unstructured user interactions into structured arrays optimal for algorithm execution.</p>
-            <div class="project-details"><span>EXECUTION //</span> Normalize chaotic media engagement variables into scalable ML-ready sets.</div>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/TikTok_Data_Preparation_Project" target="_blank" class="btn" onclick="playInterfaceSound(900, 0.08)">Extract Metrics</a>
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;">// ARCHITECTURE INFRASTRUCTURE</h2>
+        <div class="cyber-panel" style="margin-bottom: 20px;" onclick="openImmersiveModal('Data Engineering Vault', 'Accessing external mainframe servers. Deploying analytical logic to compute large dataset metrics on request.')">
+            <div class="panel-header">🚀 Engineering Hub & Sandbox Environment</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">Central engineering terminal compiling pipeline mechanics, object-oriented script logic, and modular automated frameworks built for deployment.</p>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="cyber-btn" style="font-size:0.75rem; display:inline-block; margin-top:10px;" onclick="event.stopPropagation()">EXTRACT HUB CORE</a>
+        </div>
+
+        <div class="cyber-panel orange-theme" style="margin-bottom: 40px;" onclick="openImmersiveModal('Waze & TikTok Analytics Node', 'Decrypting industrial business intelligence files. Extracting structural analytics directly into graphic telemetry frameworks.')">
+            <div class="panel-header">📊 Case Studies: Churn Logs & Media Transformation</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">Advanced pipelines evaluating Waze customer attrition matrices and transforming chaotic unstructured TikTok media signals into analytical data frames.</p>
+            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="cyber-btn" style="font-size:0.75rem; display:inline-block; margin-top:10px; border-color: var(--cyber-orange); color:var(--cyber-orange);" onclick="event.stopPropagation()">SCAN ANALYSIS</a>
+        </div>
+
+        <div class="cyber-panel" style="height: 350px; display: flex; justify-content: center; background: rgba(4,7,16,0.7);" onclick="openImmersiveModal('Radar Telemetry Feed', 'Scanning real-time system performance data vectors. Systems functional parameters balanced across core clusters.')">
+            <canvas id="radarTelemetry"></canvas>
+        </div>
+    </div>
+
+    <div class="cyber-modal" id="immersiveModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeImmersiveModal()">&times;</span>
+            <h2 id="modalTitle" style="font-family: 'Orbitron', sans-serif; color: #fff; margin-top:0;">SYSTEM ACCESSED</h2>
+            <p id="modalDesc" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;"></p>
+            <div style="font-size: 0.75rem; color: var(--cyber-orange); margin-top: 25px;">[📡 INFRASTRUCTURE DATA MATRIX STREAM]</div>
+            <div class="live-code-stream" id="codeStream"></div>
         </div>
     </div>
 
     <script>
-        // WEB AUDIO API - SİBER TIKLAMA SESİ ÜRETİCİSİ
+        // IMMERSIVE WEB AUDIO ENGINE
         let audioCtx = null;
-        function playInterfaceSound(frequency, duration) {
+        function playSynthBeep(freq, dur, type='sine') {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
-                
                 let osc = audioCtx.createOscillator();
-                let gainNode = audioCtx.createGain();
-                
-                osc.type = 'sine'; // Gerçekçi siber klik için sine dalgası
-                osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(frequency / 2, audioCtx.currentTime + duration);
-                
-                gainNode.gain.setValueAtTime(duration, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-                
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch(e) { console.log("Audio not allowed yet."); }
+                let gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(dur, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(); osc.stop(audioCtx.currentTime + dur);
+            } catch(e){}
         }
 
-        // CANLI PARÇACIKLI SİBER ARKA PLAN SİMÜLASYONU
+        // DEVAASA BÜYÜK EKRAN MODAL FONKSİYONLARI
+        function openImmersiveModal(title, text) {
+            playSynthBeep(300, 0.1, 'square'); // Derin sistem açılış sesi
+            setTimeout(() => playSynthBeep(600, 0.15, 'sine'), 80);
+            
+            document.getElementById('modalTitle').innerText = `// ${title.toUpperCase()}`;
+            document.getElementById('modalDesc').innerText = text;
+            const modal = document.getElementById('immersiveModal');
+            modal.classList.add('active');
+            
+            // Canlı Matrix Kod Akışı Simülasyonu
+            const stream = document.getElementById('codeStream');
+            stream.innerHTML = '';
+            let lineCount = 0;
+            const codes = [
+                "import os, sys, tensorflow as tf", ">> Initializing high-dimensional tensor matrices...",
+                "model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')", ">> System Matrix: Weights matched with 98.42% accuracy.",
+                "📡 Security handshake established with global network node.", ">> Memory allocation block: 0x7FFF8C2A optimized.",
+                "[SUCCESS] Pipeline array successfully structured.", ">> Scanning local directories for multi-threaded inference operations..."
+            ];
+            
+            let interval = setInterval(() => {
+                if(lineCount < codes.length) {
+                    stream.innerHTML += codes[lineCount] + "<br>";
+                    stream.scrollTop = stream.scrollHeight;
+                    playSynthBeep(800 + (lineCount*50), 0.02, 'sine');
+                    lineCount++;
+                } else { clearInterval(interval); }
+            }, 180);
+            modal.dataset.intervalId = interval;
+        }
+
+        function closeImmersiveModal() {
+            playSynthBeep(200, 0.12, 'sawtooth'); // Kapanış siber sesi
+            const modal = document.getElementById('immersiveModal');
+            modal.classList.remove('active');
+            clearInterval(modal.dataset.intervalId);
+        }
+
+        // REAL-TIME CANVAS HOLOGRAPHIC BACKGROUND
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let lines = [];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
-        class Particle {
+        class DataLine {
             constructor() {
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-                this.color = Math.random() > 0.5 ? 'rgba(0, 240, 255, 0.25)' : 'rgba(57, 255, 20, 0.2)';
+                this.y = canvas.height + Math.random() * 100;
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.len = Math.random() * 80 + 20;
+                this.opacity = Math.random() * 0.25 + 0.05;
+                this.color = Math.random() > 0.5 ? '255, 159, 0' : '0, 240, 255';
             }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
+            update() { this.y -= this.speed; if (this.y < -this.len) { this.y = canvas.height + this.len; this.x = Math.random() * canvas.width; } }
             draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.strokeStyle = `rgba(${this.color}, ${this.opacity})`;
+                ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y - this.len); ctx.stroke();
             }
         }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 90; i++) particles.push(new Particle());
+        for(let i=0; i<60; i++) lines.push(new DataLine());
+        function animateBackground() {
+            ctx.fillStyle = 'rgba(6, 9, 19, 0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            lines.forEach(l => { l.update(); l.draw(); });
+            requestAnimationFrame(animateBackground);
         }
-        initParticles();
+        animateBackground();
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dijital ağ çizgileri
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.02)';
-            ctx.lineWidth = 0.5;
-            for(let i = 0; i < particles.length; i++) {
-                for(let j = i; j < particles.length; j++) {
-                    let dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-                    if(dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
+        // KULLANICI TIKLAMALARINA ÖZEL EKRAN REAKSİYONU
+        window.addEventListener('click', () => { playSynthBeep(520, 0.03, 'sine'); });
+
+        // SIMULATORS REAL-TIME MATHEMATICAL ENGINES
+        const kmR = document.getElementById('km-range'); const sR = document.getElementById('sessions-range');
+        const vR = document.getElementById('views-range'); const rR = document.getElementById('reports-range');
+
+        function calcWaze() {
+            const km = parseInt(kmR.value); const s = parseInt(sR.value);
+            document.getElementById('km-lbl').innerText = km + " km"; document.getElementById('sessions-lbl').innerText = s;
+            let res = Math.min(100, Math.max(5, Math.round((km/8000)*65 + (100-s)*0.35)));
+            let el = document.getElementById('waze-telemetry');
+            if(res > 65) el.innerHTML = `⚠️ ATTRITION RISK DETECTED: ${res}% [CRITICAL CORE]`;
+            else el.innerHTML = `✅ PIPELINE NOMINAL: CHURN RISK ${res}% [STABLE]`;
+        }
+        function calcTikTok() {
+            const v = parseInt(vR.value); const r = parseInt(rR.value);
+            document.getElementById('views-lbl').innerText = v.toLocaleString(); document.getElementById('reports-lbl').innerText = r;
+            let res = Math.min(100, Math.max(0, Math.round((r*0.75) + (v/500000)*25)));
+            let el = document.getElementById('tiktok-telemetry');
+            if(res > 60) el.innerHTML = `🚨 AUDIT ALERT: INCIDENT RISK ${res}% [VIO RISK]`;
+            else el.innerHTML = `🟢 SYSTEM REPORT CLEAN: MATRIX ERROR AT ${res}%`;
+        }
+        kmR.addEventListener('input', () => { calcWaze(); playSynthBeep(400, 0.01); });
+        sR.addEventListener('input', () => { calcWaze(); playSynthBeep(420, 0.01); });
+        vR.addEventListener('input', () => { calcTikTok(); playSynthBeep(440, 0.01); });
+        rR.addEventListener('input', () => { calcTikTok(); playSynthBeep(460, 0.01); });
+        calcWaze(); calcTikTok();
+
+        // RADAR CHART TELEMETRY ENGINE
+        document.addEventListener("DOMContentLoaded", function() {
+            const rCtx = document.getElementById('radarTelemetry').getContext('2d');
+            new Chart(rCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Algorithms', 'Optimization', 'Data Pipelines', 'Predictive Systems', 'Statistics'],
+                    datasets: [{
+                        label: 'Core Allocation Telemetry (%)',
+                        data: [92, 78, 85, 88, 90],
+                        backgroundColor: 'rgba(255, 159, 0, 0.03)',
+                        borderColor: '#ff9f00',
+                        pointBackgroundColor: '#00f0ff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { r: { grid: { color: 'rgba(255,255,255,0.03)' }, angleLines: { color: 'rgba(255,159,0,0.1)' }, pointLabels: { color: '#94a3b8', font: { family: 'Fira Code', size: 10 } }, ticks: { display: false } } },
+                    plugins: { legend: { labels: { color: '#ffffff', font: { family: 'Orbitron', size: 11 } } } }
                 }
-                particles[i].update();
-                particles[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Tıklanan noktada yeni neon halka parçacığı oluşturma
-        window.addEventListener('click', (e) => {
-            playInterfaceSound(450, 0.04);
-            for(let i=0; i<3; i++) {
-                let p = new Particle();
-                p.x = e.clientX;
-                p.y = e.clientY;
-                p.speedX = Math.random() * 2 - 1;
-                p.speedY = Math.random() * 2 - 1;
-                p.color = '#00f0ff';
-                particles.push(p);
-                if(particles.length > 130) particles.shift();
-            }
+            });
         });
+    </script>
 
-        // ML SIMULATOR MANTIKSAL HESAPLAMALARI
-        const kmSlider = document.getElementById('km-slider');
-        const sessionsSlider = document.getElementById('sessions-slider');
-        const kmVal = document.getElementById('km-val');
-        const sessionsVal = document.getElementById('sessions-val');
-        const wazeResult = document.getElementById('waze-result');
-        const wazeBox = document.getElementById('waze-box');
-
-        function updateWaze() {
-            const km = parseInt(kmSlider.value);
-            const sessions = parseInt(sessionsSlider.value);
-            kmVal.innerText = km;
-            sessionsVal.innerText = sessions;
-            let prob = Math.min(100, Math.max(5, Math.round((km/8000)*60 + (100-sessions)*0.4)));
-            if(prob > 70){ wazeResult.innerHTML = `⚠️ CHURN RISK: ${prob}% [CRITICAL]`; wazeResult.style.color = '#ff4444'; wazeBox.style.borderColor = 'rgba(255, 68, 68, 0.4)'; }
-            else if(prob > 40){ wazeResult.innerHTML = `⚡ CHURN RISK: ${prob}% [MODERATE]`; wazeResult.style.color = '#ffb300'; wazeBox.style.borderColor = 'rgba(255, 179, 0, 0.4)'; }
-            else { wazeResult.innerHTML = `✅ CHURN RISK: ${prob}% [LOYAL]`; wazeResult.style.color = '#39ff14'; wazeBox.style.borderColor = 'rgba(57, 255, 20, 0.3)'; }
-        }
-
-        const viewsSlider = document.getElementById('views-slider');
-        const reportsSlider = document.getElementById('reports-slider');
-        const viewsVal = document.getElementById('views-val');
-        const reportsVal = document.getElementById('reports-val');
-        const tiktokResult = document.getElementById('tiktok-result');
-        const tiktokBox = document.getElementById('tiktok-box');
-
-        function updateTikTok() {
-            const views = parseInt(viewsSlider.value);
-            const reports = parseInt(reportsSlider.value);
-            viewsVal.innerText = views.toLocaleString();
-            reportsVal.innerText = reports;
-            let risk = Math.min(100, Math.max(0, Math.round((reports*0.8) + (views/500000)*20)));
-            if(risk > 65){ tiktokResult.innerHTML = `🚨 VIOLATION RISK: ${risk}% [HIGH RISK]`; tiktokResult.style.color = '#ff4444'; tiktokBox.style.borderColor = 'rgba(255, 68, 68, 0.
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function() {
+            var v = document.createElement('script'); v.type = 'text/javascript';
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '6a1b26696b0f6697163e7922' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production'
+                });
+            };
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(v, s);
+        });
+    </script>
+</body>
+</html>
