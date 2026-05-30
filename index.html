@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asena Beshiktepeli | Data Science Portfolio</title>
     <style>
-        /* Modern Koyu Tema Ayarları */
+        /* Siber Kokpit Tema Ayarları */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+            background-color: #060913; /* Derin Uzay Mavisi */
+            color: #d1d5db;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -19,70 +19,110 @@
             margin: 50px auto;
             padding: 20px;
         }
-        /* Profil Başlığı */
+        /* Başlıklar ve Kokpit Göstergeleri */
         h1 {
-            color: #58a6ff;
-            font-size: 2.5rem;
+            color: #00f0ff; /* Siber Mavi */
+            font-size: 2.7rem;
             margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
         .subtitle {
-            color: #8b949e;
+            color: #39ff14; /* Neon Yeşil */
             font-size: 1.2rem;
+            font-weight: 600;
             margin-top: 0;
             margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         p {
             font-size: 1.1rem;
-            color: #c9d1d9;
+            color: #9ca3af;
         }
         hr {
             border: 0;
             height: 1px;
-            background: #21262d;
+            background: linear-gradient(to right, #39ff14, transparent);
             margin: 40px 0;
         }
-        /* Proje Kartları */
         h2 {
-            color: #58a6ff;
-            border-bottom: 1px solid #21262d;
+            color: #00f0ff;
+            border-bottom: 1px solid #1f2937;
             padding-bottom: 10px;
             margin-top: 40px;
         }
-        .project-card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
+
+        /* Uçuş Göstergeleri (Progress Bars) */
+        .dashboard-panel {
+            background-color: #0b132b;
+            border: 1px solid #1c2541;
+            border-radius: 8px;
             padding: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #39ff14;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .progress-bar-bg {
+            background-color: #1c2541;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #00f0ff, #39ff14);
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        /* İvme Efektli Proje Kartları (Kalkış Hissiyatı) */
+        .project-card {
+            background-color: #0b132b;
+            border: 1px solid #1c2541;
+            border-radius: 8px;
+            padding: 24px;
             margin-top: 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Fareyle üzerine gelindiğinde kalkış ve parlama efekti */
+        .project-card:hover {
+            transform: translateY(-5px); /* İvmelenme/Kalkış */
+            border-color: #00f0ff;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
         }
         .project-card strong {
             color: #ff7b72;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         .project-card p {
             font-size: 1rem;
-            color: #8b949e;
+            color: #9ca3af;
             margin: 10px 0 20px 0;
         }
-        /* Şık Buton Tasarımı */
+
+        /* Şık Siber Buton */
         .btn {
             display: inline-block;
-            background-color: #238636;
-            color: #ffffff;
-            padding: 8px 16px;
+            background-color: #1f2937;
+            color: #00f0ff;
+            padding: 10px 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            line-height: 20px;
-            white-space: nowrap;
-            vertical-align: middle;
-            cursor: pointer;
-            border: 1px solid rgba(240,246,252,0.1);
+            border: 1px solid #00f0ff;
             border-radius: 6px;
             text-decoration: none;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
         }
         .btn:hover {
-            background-color: #2ea44f;
+            background-color: #00f0ff;
+            color: #060913;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
     </style>
 </head>
@@ -90,51 +130,62 @@
 
     <div class="container">
         <h1>Hello, I'm Asena</h1>
-        <p class="subtitle">Data Analyst & Data Science Enthusiast</p>
+        <p class="subtitle">🛰️ Data Analyst & AI Systems Explorer</p>
         
-        <p>Welcome to my digital space. I document my data science learning journey, modular code structures, and comprehensive data analysis projects here.</p>
+        <p>Welcome to my digital flight deck. I deploy data pipelines, build analytical models, and document my advanced machine learning journey right here.</p>
         
+        <h2>🛸 Core Systems Status</h2>
+        <div class="dashboard-panel">
+            <div class="metric-title"><span>Python & Data Analysis Structures</span><span>90%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+            
+            <div class="metric-title"><span>Predictive Modeling & AI Sandbox</span><span>75%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" style="width: 75%;"></div></div>
+            
+            <div class="metric-title"><span>SQL & Telemetry Pipelines</span><span>80%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" style="width: 80%;"></div></div>
+        </div>
+
         <hr>
         
-        <h2>Core Learning & Structures</h2>
+        <h2>⚡ Core Learning & Structures</h2>
         <div class="project-card">
             <strong>🚀 Data Science Journey</strong>
             <p>A curated collection of modular programming structures, Python scripts, and advanced data analysis frameworks developed during my learning path.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="btn">View Main Repository</a>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science" target="_blank" class="btn">Launch Repository</a>
         </div>
 
-        <h2>Artificial Intelligence & Machine Learning</h2>
-        
+        <h2>🤖 Artificial Intelligence & Machine Learning</h2>
         <div class="project-card">
-            <strong>🤖 AI & Predictive Modeling Sandbox</strong>
+            <strong>🛰️ AI & Predictive Modeling Sandbox</strong>
             <p>Upcoming deployments of Machine Learning models, Natural Language Processing (NLP) pipelines, and intelligent automation agents. Code and live demos coming soon.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="btn">Browse AI Repositories</a>
+            <a href="https://github.com/hellocypriotnomadassistant-oss" target="_blank" class="btn">Scan AI Repositories</a>
         </div>
 
-        <h2>Data Analytics Projects</h2>
+        <h2>📊 Data Analytics Projects</h2>
         
         <div class="project-card">
             <strong>🚗 Waze User Churn Project</strong>
             <p>Analysis of user retention and churn rates for Waze. Built with exploratory data analysis (EDA) and predictive modeling approaches.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Waze_User_Churn_Project" target="_blank" class="btn">View Project</a>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Waze_User_Churn_Project" target="_blank" class="btn">Inspect Metrics</a>
         </div>
 
         <div class="project-card">
             <strong>🎵 TikTok Data Preparation Project</strong>
             <p>Data cleaning, structuring, and preparation pipeline focusing on user engagement metrics and content classification analysis.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/TikTok_Data_Preparation_Project" target="_blank" class="btn">View Project</a>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/TikTok_Data_Preparation_Project" target="_blank" class="btn">Inspect Metrics</a>
         </div>
 
         <div class="project-card">
             <strong>🚕 NYC Taxi Analytics Project</strong>
             <p>Spatial and temporal analysis of New York City taxi rides. Includes distance calculations, trip durations, and revenue optimization visualizations.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/NYC_Taxi_Analytics_Project" target="_blank" class="btn">View Project</a>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/NYC_Taxi_Analytics_Project" target="_blank" class="btn">Inspect Metrics</a>
         </div>
 
         <div class="project-card">
             <strong>🦄 Unicorn Companies Analysis</strong>
             <p>Comprehensive data analysis exploring privately held startup companies valued at over $1 billion, focusing on industry distributions and funding insights.</p>
-            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Unicorn-Analysis" target="_blank" class="btn">View Project</a>
+            <a href="https://github.com/hellocypriotnomadassistant-oss/Data-Science/tree/main/Unicorn-Analysis" target="_blank" class="btn">Inspect Metrics</a>
         </div>
     </div>
 
